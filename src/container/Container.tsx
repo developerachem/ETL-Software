@@ -1,0 +1,11 @@
+function Container({ children }: { children: JSX.Element }) {
+  return (
+    <div className="text-[22px] justify-center items-center flex">
+      <div className="banner flex p-5 max-w-[1550px] w-[1550px] justify-between">
+        {children}
+      </div>
+    </div>
+  );
+}
+
+export default Container;

@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "font";
+  src: url("./assets/font/Light.ttf");
+
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "font-300";
+  src: url("./assets/font/Regular.ttf");
+
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "font-400";
+  src: url("./assets/font/Medium.ttf");
+
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "font-500";
+  src: url("./assets/font/SemiBold.ttf");
+
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "font-600";
+  src: url("./assets/font/Bold.ttf");
+
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "font-It";
+  src: url("./assets/font/BoldIt.ttf");
+
+  font-style: normal;
+  font-weight: normal;
+}
+/* 
+*::-webkit-scrollbar {
+  width: 5px !important;
+  height: 5px !important;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: #fff;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: gray;
+  background-clip: content-box;
+  color: #b5b9c2;
+} */
+
+/* Menu Hover */
+.menu-list:hover .hover-box {
+  opacity: 1;
+  visibility: visible;
+}
+
+.hover-box {
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.5s;
+}
