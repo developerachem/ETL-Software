@@ -1,14 +1,17 @@
 import { IoLogoWhatsapp } from "react-icons/io";
 import { IoCall } from "react-icons/io5";
+import { Link } from "react-router-dom";
 import logo from "../../assets/image/logo.png";
 import Container from "../../container/Container";
 
 function HeaderTop() {
   return (
-    <div className="bg-white border-b px-20 ">
+    <div className="bg-[#F4F5FA] border-b px-20 ">
       <Container>
         <div className="w-full flex justify-between items-center">
-          <img src={logo} alt="" className="w-[100px]" />
+          <Link to="/">
+            <img src={logo} alt="" className="w-[100px]" />
+          </Link>
 
           <div className="flex gap-5 items-center">
             <div className="border flex p-2 gap-3 rounded-full bg-color300 px-5 items-center">

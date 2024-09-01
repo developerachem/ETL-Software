@@ -1,25 +1,39 @@
+import { TiArrowBackOutline } from "react-icons/ti";
+import { Link } from "react-router-dom";
 import BannerSlider from "../../components/bannerSlider/BannerSlider";
 import Container from "../../container/Container";
 
 function Home() {
   return (
-    <Container>
-      <div className="flex justify-between items-end w-full h-[50vh]">
-        <div className="">
-          <h1 className="text-[50px] text-[#153441] font-[font-600]">
-            $869 M funding{" "}
-          </h1>
-          <h1 className="text-[50px] text-[#153441] font-[font-600]">
-            raised by our apps
-          </h1>
-          <h1 className="text-[50px] text-primaryColor font-[font-It]">
-            in 1 year!
-          </h1>
-        </div>
+    <div className="banner">
+      <Container>
+        <div className="flex justify-between items-center w-full h-[85vh] ">
+          <div className="w-[50%]">
+            <h1 className="text-[70px] text-[#153441] font-[font-500]">
+              $869 M funding{" "}
+            </h1>
+            <h1 className="-mt-5 text-[70px] text-[#153441] font-[font-500]">
+              raised by our apps
+            </h1>
+            <h1 className="text-[70px] text-primaryColor font-[font-It]">
+              in 1 year!
+            </h1>
 
-        <BannerSlider />
-      </div>
-    </Container>
+            <Link
+              to="/"
+              className="btn mt-5 rounded-full bg-primaryColor text-white border-primaryColor hover:bg-color800  px-8"
+            >
+              <div className="flex items-center gap-3 font-[font-600] text-[16px]">
+                Learn More
+                <TiArrowBackOutline size={25} className="rotate-[130deg]" />
+              </div>
+            </Link>
+          </div>
+
+          <BannerSlider />
+        </div>
+      </Container>
+    </div>
   );
 }
 
