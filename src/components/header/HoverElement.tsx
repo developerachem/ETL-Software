@@ -1,39 +1,39 @@
-import { AiFillAndroid } from "react-icons/ai";
+import React from "react";
 import { Link } from "react-router-dom";
+import { serviceArray } from "../../routes/dropdownRouteArray";
 
 export const ServiceHoverElement = () => {
   return (
     <ul className="grid grid-cols-2 gap-3">
-      <ServiceList title="Android" />
-      <ServiceList title="Android" />
-      <ServiceList title="Android" />
-      <ServiceList title="Android" />
-      <ServiceList title="Android" />
-      <ServiceList title="Android" />
-      <ServiceList title="Android" />
-      <ServiceList title="Android" />
-      <ServiceList title="Android" />
-      <ServiceList title="Android" />
+      {serviceArray.map((item, index) => (
+        <React.Fragment key={index}>
+          <ServiceList data={item} />
+        </React.Fragment>
+      ))}
     </ul>
   );
 };
 
 interface listProps {
-  title: string;
+  data: {
+    title: string;
+    url: string;
+    icon: JSX.Element;
+  };
 }
-const ServiceList = ({ title }: listProps) => {
+const ServiceList = ({ data }: listProps) => {
   return (
     <li>
       <Link
-        to="/"
-        className={`flex items-center gap-3 hover:bg-color200 text-black rounded-xl py-1.5 px-2`}
+        to={data.url}
+        className={`flex items-center gap-3 hover:bg-color200 text-black rounded-xl py-1.5 px-2 ease-in duration-300`}
       >
         <div
           className={`bg-color500 rounded-full h-10 w-10 flex justify-center items-center`}
         >
-          <AiFillAndroid size={25} color="var(--primaryColor)" />
+          {data.icon}
         </div>
-        {title}
+        {data.title}
       </Link>
     </li>
   );

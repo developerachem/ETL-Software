@@ -9,6 +9,7 @@ import Home from "./pages/home/Home";
 import Portfolio from "./pages/portfolio/Portfolio";
 import Services from "./pages/services/Services";
 import Technology from "./pages/technology/Technology";
+import { appRouter } from "./routes/appRouter";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,7 @@ const router = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
+      ...appRouter,
     ],
     errorElement: <ErrorBoundaryFallback />,
   },

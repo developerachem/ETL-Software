@@ -31,6 +31,7 @@ export default {
     extend: {
       colors: {
         primaryColor: "var(--primaryColor)",
+        color100: "var(--color21)",
         color200: "var(--color20)",
         color300: "var(--color30)",
         color400: "var(--color40)",
@@ -48,6 +49,7 @@ export default {
       {
         blue: {
           "--primaryColor": "#2D62AE",
+          "--color10": "#2D62AE10",
           "--color20": "#2D62AE20",
           "--color30": "#2D62AE30",
           "--color40": "#2D62AE40",
@@ -59,6 +61,7 @@ export default {
         },
         yellow: {
           "--primaryColor": "#F89F20",
+          "--color10": "#F89F2010",
           "--color20": "#F89F2020",
           "--color30": "#F89F2030",
           "--color40": "#F89F2040",

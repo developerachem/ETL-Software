@@ -1,12 +1,3 @@
-/*
- * Created by: Andrew
- * Date created: 10.11.2023
- * Modified by: Andrew
- * Last modified: 03.12.2023
- * Reviewed by:
- * Date Reviewed:
- */
-
 // ERROR BOUNDARY FALLBACK COMPONENT
 const ErrorBoundaryFallback = () => {
   // Refresh the page

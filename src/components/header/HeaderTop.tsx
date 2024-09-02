@@ -3,10 +3,11 @@ import { IoCall } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import logo from "../../assets/image/logo.png";
 import Container from "../../container/Container";
+import { URLContact } from "../../routes/url";
 
 function HeaderTop() {
   return (
-    <div className="bg-[#F4F5FA] border-b px-20 ">
+    <div className="bg-[#F4F5FA] border-b px-20 sticky top-0 z-50">
       <Container>
         <div className="w-full flex justify-between items-center">
           <Link to="/">
@@ -22,9 +23,12 @@ function HeaderTop() {
               <div className="w-[2px] bg-color500 h-[30px]" />
               <IoCall size={25} className="text-primaryColor cursor-pointer" />
             </div>
-            <button className="btn bg-primaryColor rounded-full text-white px-7 hover:bg-color900">
+            <Link
+              to={URLContact()}
+              className="btn border-primaryColor bg-primaryColor rounded-full text-white px-7 hover:bg-color900 font-[font-500]"
+            >
               Get In Touch
-            </button>
+            </Link>
           </div>
         </div>
       </Container>

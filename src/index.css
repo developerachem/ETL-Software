@@ -49,6 +49,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: font-300;
+  color: #153441;
 }
 *::after,
 *::before {
@@ -71,6 +73,9 @@ p {
 }
 a {
   text-decoration: none;
+}
+body {
+  overflow-x: hidden;
 }
 
 /* 
@@ -108,9 +113,53 @@ a {
 }
 
 .banner {
-  background-color: red;
   background-image: url("https://www.techugo.com/new-assets/img/body-top-bg.jpg");
   background-repeat: no-repeat;
   background-position: right;
   background-size: auto;
+}
+
+/* Service Banner */
+.waves {
+  -ms-filter: "alpha(opacity=0)";
+  opacity: 0;
+  box-shadow: -13px 4px 29px rgba(255, 255, 255, 0.25),
+    34px 0px 23px rgba(136, 143, 158, 0.18),
+    inset -13px 4px 29px rgba(255, 255, 255, 0.25),
+    inset 13px 0px 23px rgba(207, 208, 210, 0.5);
+  border-radius: 100%;
+  -webkit-animation: waves 4s ease-in-out infinite;
+  animation: waves 4s ease-in-out infinite;
+}
+
+.wave-1 {
+  -webkit-animation-delay: 1s !important;
+  animation-delay: 1s !important;
+}
+.wave-2 {
+  -webkit-animation-delay: 2s !important;
+  animation-delay: 2s !important;
+}
+.wave-3 {
+  -webkit-animation-delay: 3s !important;
+  animation-delay: 3s !important;
+}
+
+@keyframes waves {
+  0% {
+    -webkit-transform: scale(0, 0);
+    transform: scale(0, 0);
+    opacity: 0;
+    -ms-filter: "alpha(opacity=0)";
+  }
+  50% {
+    opacity: 0.9;
+    -ms-filter: "alpha(opacity=90)";
+  }
+  100% {
+    -webkit-transform: scale(0.9, 0.9);
+    transform: scale(4.9, 4.9);
+    opacity: 0;
+    -ms-filter: "alpha(opacity=0)";
+  }
 }
