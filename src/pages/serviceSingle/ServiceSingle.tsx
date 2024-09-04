@@ -487,7 +487,7 @@ const SliderBox = () => {
       />
       <div className="mt-10 flex justify-between">
         <div className="">
-          <h3 className="font-[font-500] text-[20px]">Developer Achem</h3>
+          <h3 className="font-[font-500] text-[20px]">MD Achem</h3>
           <div
             className={`flex justify-between gap-3 w-[150px] items-center mt-3`}
           >
