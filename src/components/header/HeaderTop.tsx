@@ -1,17 +1,41 @@
+import { useEffect, useState } from "react";
+import { FaBars } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { IoCall } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import logo from "../../assets/image/logo.png";
 import Container from "../../container/Container";
 import { URLContact } from "../../routes/url";
+import { styles } from "../../utils/cn";
 
 function HeaderTop() {
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = (window.scrollY / height) * 100;
+      setScrollPosition(scrolled);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <div className="bg-[#F4F5FA] border-b px-20 sticky top-0 z-50">
+    <div
+      className={styles("bg-[#F4F5FA] border-b  fixed w-full top-0 z-50", {
+        "bg-white": scrollPosition > 3,
+      })}
+    >
+      <div
+        className={`bg-primaryColor p-0.5`}
+        style={{ width: scrollPosition + "%" }}
+      />
       <Container>
-        <div className="w-full flex justify-between items-center">
+        <div className="w-full flex justify-between items-center py-2">
           <Link to="/">
-            <img src={logo} alt="" className="w-[100px]" />
+            <img src={logo} alt="" className="w-[80px] lg:w-[100px]" />
           </Link>
 
           <div className="flex gap-5 items-center">
@@ -25,10 +49,12 @@ function HeaderTop() {
             </div>
             <Link
               to={URLContact()}
-              className="btn border-primaryColor bg-primaryColor rounded-full text-white px-7 hover:bg-color900 font-[font-500]"
+              className="btn border-primaryColor bg-primaryColor rounded-full text-white px-4 lg:px-7 hover:bg-color900 font-[font-500]"
             >
               Get In Touch
             </Link>
+
+            <FaBars size={30} className="block md:hidden" />
           </div>
         </div>
       </Container>

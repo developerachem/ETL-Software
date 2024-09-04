@@ -163,3 +163,123 @@ body {
     -ms-filter: "alpha(opacity=0)";
   }
 }
+
+.service-box.aos-animate:before {
+  position: absolute;
+  content: "";
+  width: 2px;
+  height: 100%;
+  background-color: var(--primaryColor);
+  top: -0%;
+}
+.service-box.aos-animate:after {
+  position: absolute;
+  content: "";
+  height: 15px;
+  width: 15px;
+  background-color: var(--primaryColor);
+  bottom: 0%;
+  border-radius: 100%;
+}
+
+.sr_line_1.aos-animate:before {
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  -webkit-animation: expand;
+  animation-duration: 1s;
+}
+.sr_line_2.aos-animate:before {
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  -webkit-animation: expand;
+  animation-duration: 2s;
+}
+.sr_line_3.aos-animate:before {
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  -webkit-animation: expand;
+  animation-duration: 3s;
+}
+.sr_line_4.aos-animate:before {
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  -webkit-animation: expand;
+  animation-duration: 4s;
+}
+
+.sr_line_1.aos-animate:after {
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  -webkit-animation: expand-1;
+  animation-duration: 0.8s;
+  animation-delay: 1.4s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+.sr_line_2.aos-animate:after {
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  -webkit-animation: expand-1;
+  animation-duration: 0.8s;
+  animation-delay: 1.8s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+.sr_line_3.aos-animate:after {
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  -webkit-animation: expand-1;
+  animation-duration: 0.8s;
+  animation-delay: 2.2s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+.sr_line_4.aos-animate:after {
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  -webkit-animation: expand-1;
+  animation-duration: 0.8s;
+  animation-delay: 2.6s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.heading {
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  -webkit-animation: expand-2;
+  animation-duration: 0.8s;
+  animation-delay: 2s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+  font-size: 14px;
+}
+
+@keyframes expand {
+  0% {
+    height: 0%;
+  }
+  100% {
+    height: 100%;
+  }
+}
+
+@keyframes expand-1 {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  100% {
+    height: 15px;
+    opacity: 1;
+  }
+}
+
+@keyframes expand-2 {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

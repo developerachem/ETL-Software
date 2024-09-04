@@ -81,7 +81,7 @@ const List = ({ title, link, children, isButton }: ListProps) => {
         <Link
           to={link || "/"}
           className={styles(
-            `font-[font-500] text-[17px] text-black bg-white px-[30px] py-3 rounded-full ease-in duration-300 hover:bg-primaryColor hover:text-white inline-block`,
+            `font-[font-500] text-[15px] lg:text-[17px] text-black bg-white px-[20px] lg:px-[30px] py-3 rounded-full ease-in duration-300 hover:bg-primaryColor hover:text-white inline-block`,
             {
               "bg-primaryColor text-white": pathname === link,
             }
@@ -92,7 +92,7 @@ const List = ({ title, link, children, isButton }: ListProps) => {
       ) : (
         <button
           className={styles(
-            `font-[font-500] text-[17px] text-black bg-white px-[30px] py-3 rounded-full ease-in duration-300 hover:bg-primaryColor hover:text-white`,
+            `font-[font-500] text-[15px] lg:text-[17px] text-black bg-white px-[20px] lg:px-[30px] py-3 rounded-full ease-in duration-300 hover:bg-primaryColor hover:text-white`,
             {
               "bg-primaryColor text-white": pathname === link,
             }

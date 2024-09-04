@@ -1,6 +1,11 @@
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
 import ErrorBoundaryFallback from "./components/error-boundary/ErrorBoundaryFallback";
+import { setScroll } from "./features/window/window";
 import RootLayout from "./layout/RootLayout";
 import About from "./pages/about/About";
 import Blog from "./pages/blog/Blog";
@@ -50,6 +55,27 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
+  const dispatch = useDispatch();
+
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    dispatch(setScroll(position));
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    console.log("Running...");
+
+    // Clean up the event listener when the component is unmounted
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
       <RouterProvider router={router} />

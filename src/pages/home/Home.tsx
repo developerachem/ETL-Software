@@ -38,6 +38,8 @@ function Home() {
           </div>
         </Container>
       </div>
+
+      <div className="h-[1000px]" />
     </>
   );
 }
