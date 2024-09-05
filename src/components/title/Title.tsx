@@ -5,13 +5,24 @@ interface Props {
   title: string;
   className?: string;
   subTitle?: string;
+  titleClass?: string;
+  booletClass?: string;
 }
 
-function Title({ width, title, className, subTitle }: Props) {
+function Title({
+  width,
+  title,
+  className,
+  subTitle,
+  titleClass,
+  booletClass,
+}: Props) {
   return (
     <div className={styles("flex flex-col items-center gap-2", { className })}>
       <div className="flex items-center justify-center gap-1">
-        <h2 className="text-[20px] md:text-[28px] xl:text-[35px] font-[font-600]">
+        <h2
+          className={`text-[20px] md:text-[28px] xl:text-[35px] font-[font-600] ${titleClass}`}
+        >
           {title || "--"}
         </h2>
         <h2 className="text-[20px] md:text-[28px] xl:text-[35px] font-[font-it] text-primaryColor">
@@ -24,11 +35,21 @@ function Title({ width, title, className, subTitle }: Props) {
           width || 150
         }px] items-center`}
       >
-        <div className="bg-primaryColor h-[7px] w-[30px] rounded-full" />
-        <div className="bg-primaryColor h-[7px] w-[30px] rounded-full" />
-        <div className="bg-primaryColor h-[7px] w-[30px] rounded-full" />
-        <div className="bg-primaryColor h-[7px] w-full rounded-full" />
-        <div className="bg-primaryColor h-[7px] w-[30px] rounded-full" />
+        <div
+          className={`bg-primaryColor h-[7px] w-[30px] rounded-full ${booletClass}`}
+        />
+        <div
+          className={`bg-primaryColor h-[7px] w-[30px] rounded-full ${booletClass}`}
+        />
+        <div
+          className={`bg-primaryColor h-[7px] w-[30px] rounded-full ${booletClass}`}
+        />
+        <div
+          className={`bg-primaryColor h-[7px] w-full rounded-full ${booletClass}`}
+        />
+        <div
+          className={`bg-primaryColor h-[7px] w-[30px] rounded-full ${booletClass}`}
+        />
       </div>
     </div>
   );

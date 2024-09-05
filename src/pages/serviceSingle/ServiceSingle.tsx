@@ -2,9 +2,17 @@ import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import React, { useEffect, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
-import { FaAppStoreIos, FaApple, FaGooglePlay, FaPlus } from "react-icons/fa";
+import {
+  FaAppStoreIos,
+  FaApple,
+  FaGooglePlay,
+  FaMinus,
+  FaPlus,
+} from "react-icons/fa";
 import { IoLogoAndroid } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import Title from "../../components/title/Title";
 import Container from "../../container/Container";
 import { URLContact } from "../../routes/url";
@@ -13,6 +21,7 @@ import { styles } from "../../utils/cn";
 function ServiceSingle() {
   const [init, setInit] = useState(false);
   const [active, setActive] = useState("frontend");
+  const [check, setCheck] = useState(0);
 
   // * Particl Initiate
   useEffect(() => {
@@ -28,13 +37,11 @@ function ServiceSingle() {
       <div className="h-[70vh] relative bg-[#F4F5FA]">
         <Container>
           <div className="w-full md:w-[60%] ">
-            <h1 className="font-[font-it] text-[50px] xl:text-[60px] text-primaryColor mb-5 text-center md:text-left">
-              Services Name
+            <h1 className="font-[font-it] text-[30px] md:text-[50px] xl:text-[60px] text-primaryColor mb-5 text-center md:text-left">
+              Building Mobile Apps That Make an Impact
             </h1>
-            <h1 className="text-[20px] lg:text-[25px] xl:text-[35px] font-[font-500] text-center md:text-left">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-              itaque nihil alias expedita magnam ducimus officia, quis odit
-              deleniti eius.
+            <h1 className="text-[15px] sm:text-[17px] md:text-[20px] lg:text-[25px] xl:text-[35px] font-[font-500] text-center md:text-left">
+              Custom mobile solutions designed to engage users and drive growth.
             </h1>
 
             <ul className="flex justify-center md:justify-start items-center gap-2 mt-10">
@@ -55,7 +62,7 @@ function ServiceSingle() {
           </div>
         </Container>
 
-        <div className="absolute top-[100px] md:top-[200px] 2xl:top-[250px] right-[120px] md:right-[200px] xl:right-[300px] 2xl:right-[400px]">
+        <div className="absolute top-[70px] sm:top-[100px] md:top-[200px] 2xl:top-[250px] right-[120px] md:right-[200px] xl:right-[300px] 2xl:right-[400px]">
           <div className="flex justify-center items-center relative">
             <Link
               to={URLContact()}
@@ -142,10 +149,31 @@ function ServiceSingle() {
         </div>
       </div>
 
+      <div className="py-[100px] bg-primaryColor">
+        <Container>
+          <div className="w-full">
+            <Title
+              title="Your Partner in Mobile App Innovation"
+              titleClass="text-white text-center"
+              booletClass="bg-[#ffffff70]"
+            />
+
+            <p className="mt-5 text-center text-[#ffffff] text-[17px] w-full xsm:w-[80%] md:w-[60%] m-auto">
+              We craft mobile apps that captivate users and fuel business
+              growth. Whether it’s a robust native app for iOS or Android, or a
+              flexible cross-platform solution, our expert developers are here
+              to bring your vision to life. With a focus on intuitive design and
+              top-notch performance, we build apps that enhance your digital
+              presence and deliver outstanding user experiences.
+            </p>
+          </div>
+        </Container>
+      </div>
+
       <div className="py-[100px] bg-[#F4F5FA]">
         <Container>
           <div className="w-full">
-            <Title title="Why Hire Developers From " subTitle=" Excel ?" />
+            <Title title="Why Hire Developers From Excel ?" />
 
             <div className="mt-10 grid grid-cols-1 xsm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-5">
               <div className="p-5 border bg-[#E8ECF5] text-center py-10">
@@ -215,7 +243,6 @@ function ServiceSingle() {
         </Container>
       </div>
 
-      {/* bg-[#2D62AE10] */}
       <div className="bg-[#E8ECF5] py-[100px]">
         <Container>
           <div className="w-full ">
@@ -260,7 +287,11 @@ function ServiceSingle() {
 
               {active === "frontend" && (
                 <div className="pt-5 grid grid-cols-2 xsm:grid-cols-3 md:grid-cols-4 gap-2">
-                  <div className="flex flex-col items-center p-1 md:p-3 py-5 md:py-10">
+                  <div
+                    className={styles(
+                      "flex flex-col items-center p-1 md:p-3 py-5 md:py-10 transition-opacity"
+                    )}
+                  >
                     <FaApple size={40} className="text-primaryColor" />
                     <h1 className="text-[16px] font-[font-400] text-center mt-3">
                       Apple App Store
@@ -395,8 +426,66 @@ function ServiceSingle() {
             <Title title="What Client Says" />
 
             <div className="mt-20">
-              <div className="flex gap-5">
-                <SliderBox />
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 items-center">
+                <div className="">
+                  <h1 className="text-[15px] md:text-[20px] lg:text-[25px] font-[font-600] mb-5 text-center lg:text-left">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Magni rerum error qui fugiat, quos temporibus!
+                  </h1>
+                  <p className="text-center lg:text-left">
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                    Aut maiores eaque obcaecati aspernatur placeat incidunt eos
+                    debitis ullam, nesciunt explicabo.
+                  </p>
+
+                  <div className="text-center lg:text-left">
+                    <Link
+                      to={URLContact()}
+                      className="mt-5 btn border-primaryColor bg-primaryColor rounded-full text-white px-4 lg:px-7 hover:bg-color900 font-[font-500]"
+                    >
+                      Get In Touch
+                    </Link>
+                  </div>
+                </div>
+                <div className="flex gap-5 justify-end items-end">
+                  <Swiper
+                    spaceBetween={50}
+                    slidesPerView={1}
+                    onSlideChange={() => console.log("slide change")}
+                    onSwiper={(swiper) => console.log({ swiper })}
+                    pagination={{
+                      clickable: true,
+                    }}
+                    loop={true}
+                    autoplay={{
+                      delay: 2500,
+                      disableOnInteraction: false,
+                    }}
+                    modules={[Autoplay, Pagination, Navigation]}
+                  >
+                    <SwiperSlide className="flex justify-center items-center">
+                      <SliderBox />
+                    </SwiperSlide>
+                    <SwiperSlide className="flex justify-center items-center">
+                      <SliderBox />
+                    </SwiperSlide>
+                    <SwiperSlide className="flex justify-center items-center">
+                      <SliderBox />
+                    </SwiperSlide>
+                    <SwiperSlide className="flex justify-center items-center">
+                      <SliderBox />
+                    </SwiperSlide>
+                    <SwiperSlide className="flex justify-center items-center">
+                      <SliderBox />
+                    </SwiperSlide>
+                    <SwiperSlide className="flex justify-center items-center">
+                      <SliderBox />
+                    </SwiperSlide>
+                    <SwiperSlide className="flex justify-center items-center">
+                      <SliderBox />
+                    </SwiperSlide>
+                  </Swiper>
+                </div>
               </div>
             </div>
           </div>
@@ -408,12 +497,14 @@ function ServiceSingle() {
           <div className="w-full">
             <Title title="FAQ' S" />
 
-            <div className="mt-10 grid grid-cols-2 gap-5">
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div className="">
                 {test.map((item, index) => {
                   return (
                     <React.Fragment key={index}>
-                      {index % 2 ? null : <Faq item={item} />}
+                      {index % 2 ? null : (
+                        <Faq index={index} check={check} setCheck={setCheck} />
+                      )}
                     </React.Fragment>
                   );
                 })}
@@ -423,7 +514,9 @@ function ServiceSingle() {
                 {test.map((item, index) => {
                   return (
                     <React.Fragment key={index}>
-                      {index % 2 ? <Faq item={item} /> : null}
+                      {index % 2 ? (
+                        <Faq index={index} check={check} setCheck={setCheck} />
+                      ) : null}
                     </React.Fragment>
                   );
                 })}
@@ -479,7 +572,7 @@ const FeaturesBox = ({ img, title, className }: boxProps) => {
 
 const SliderBox = () => {
   return (
-    <div className="border shadow-lg p-5 w-[500px] xxl:w-[550px] bg-white rounded-lg relative">
+    <div className="border shadow-lg p-5 w-[450px] sm:w-[500px] xxl:w-[550px] bg-white rounded-lg relative mt-14 mb-10">
       <img
         src="https://i.ibb.co/G5yyssZ/Scuare.jpg"
         alt=""
@@ -509,17 +602,17 @@ const SliderBox = () => {
         </div>
       </div>
 
-      <div className="mt-8 grid grid-cols-2 gap-5">
+      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div className="">
-          <p className="text-[15px] font-[font-500] text-[#00000099]">
+          <p className="text-[13px] sm:text-[15px] font-[font-500] text-[#00000099]">
             Web Developer
           </p>
-          <p className="text-[15px] font-[font-500] text-[#00000099]">
+          <p className="text-[12px] sm:text-[13px] font-[font-500] text-[#00000099]">
             Excel Technology LTD.
           </p>
         </div>
         <p
-          className="text-[14px] font-[font-300]"
+          className="text-[12px] sm:text-[14px] font-[font-300]"
           style={{ lineHeight: "18px" }}
         >
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam
@@ -532,30 +625,52 @@ const SliderBox = () => {
 };
 
 interface FaqProps {
-  open?: boolean;
-  item: number;
+  setCheck: React.Dispatch<React.SetStateAction<number>>;
+  check: number;
+  index: number;
 }
-const Faq = ({ open, item }: FaqProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Faq = ({ index, check, setCheck }: FaqProps) => {
+  // * Handle Accordion Toggle
+  const handleAccordion = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (Number(e.target.value) === check) {
+      setCheck(0);
+    } else {
+      setCheck(Number(e.target.value));
+    }
+  };
+
   return (
     <div className="mb-5">
       <div className="border rounded flex flex-col">
         <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="py-3 px-5 flex justify-between items-center cursor-pointer border-b w-full"
+          value={index + 1}
+          onClick={(e) => handleAccordion(e)}
+          className={styles(
+            "py-3 px-5 flex justify-between items-center cursor-pointer w-full",
+            { "border-b": check === index + 1 }
+          )}
         >
-          <p className="font-[font-500] text-[17px]">Title {item}</p>
-          <FaPlus size={15} />
-          <input type="radio" className="hidden" defaultChecked={open} />
+          <p className="font-[font-500] text-[17px] pointer-events-none">
+            Title {index + 1}
+          </p>
+          {check === index + 1 ? (
+            <FaMinus size={15} className="pointer-events-none" />
+          ) : (
+            <FaPlus size={15} className="pointer-events-none" />
+          )}
         </button>
 
         <div
-          className={styles("h-[0px] invisible opacity-0 flex", {
-            "h-auto visible opacity-100": isOpen,
-          })}
+          className={styles(
+            "grid overflow-hidden p-5 transition-all duration-300 ease-out",
+            {
+              "grid-rows-[1fr] opacity-100": check === index + 1,
+              "grid-rows-[0fr] opacity-0 p-0": check !== index + 1,
+            }
+          )}
           // style={{ transition: "all 1s ease-in-out" }}
         >
-          <p className="px-5 font-[font-300] text-[15px] py-3">
+          <p className=" font-[font-300] text-[15px] overflow-hidden">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
             provident quod accusantium expedita esse ad autem tempora facilis
             vel est! Lorem ipsum, dolor sit amet consectetur adipisicing elit.

@@ -8,15 +8,15 @@ function Home() {
     <>
       <div className="banner">
         <Container>
-          <div className="flex justify-between items-center w-full h-[85vh] ">
-            <div className="w-[50%]">
-              <h1 className="text-[70px] text-[#153441] font-[font-500]">
+          <div className="flex flex-col md:flex-row justify-between items-center w-full h-[70vh] md:h-[85vh] ">
+            <div className="w-full md:w-[50%]">
+              <h1 className="text-[40px] md:text-[50px] lg:text-[60px] xl:text-[70px] text-[#153441] font-[font-500]">
                 $869 M funding{" "}
               </h1>
-              <h1 className="-mt-5 text-[70px] text-[#153441] font-[font-500]">
+              <h1 className="-mt-5 text-[40px] md:text-[50px] lg:text-[60px] xl:text-[70px] text-[#153441] font-[font-500]">
                 raised by our apps
               </h1>
-              <h1 className="text-[70px] text-primaryColor font-[font-It]">
+              <h1 className="text-[40px] md:text-[50px] lg:text-[60px] xl:text-[70px] text-primaryColor font-[font-It]">
                 in 1 year!
               </h1>
 

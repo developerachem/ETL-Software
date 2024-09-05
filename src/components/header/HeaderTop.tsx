@@ -35,26 +35,30 @@ function HeaderTop() {
       <Container>
         <div className="w-full flex justify-between items-center py-2">
           <Link to="/">
-            <img src={logo} alt="" className="w-[80px] lg:w-[100px]" />
+            <img
+              src={logo}
+              alt=""
+              className="w-[60px] sm:w-[80px] lg:w-[100px]"
+            />
           </Link>
 
           <div className="flex gap-5 items-center">
-            <div className="border flex p-2 gap-3 rounded-full bg-color300 px-5 items-center">
+            <div className="border flex py-1 sm:py-2 gap-3 rounded-full bg-color300 px-5 items-center">
               <IoLogoWhatsapp
-                size={25}
+                size={22}
                 className="text-primaryColor cursor-pointer"
               />
               <div className="w-[2px] bg-color500 h-[30px]" />
-              <IoCall size={25} className="text-primaryColor cursor-pointer" />
+              <IoCall size={22} className="text-primaryColor cursor-pointer" />
             </div>
             <Link
               to={URLContact()}
-              className="btn border-primaryColor bg-primaryColor rounded-full text-white px-4 lg:px-7 hover:bg-color900 font-[font-500]"
+              className="hidden md:flex btn border-primaryColor bg-primaryColor rounded-full text-white px-2 sm:px-4 text-[11px] sm:text-[14px] lg:px-7 hover:bg-color900 font-[font-500]"
             >
               Get In Touch
             </Link>
 
-            <FaBars size={30} className="block md:hidden" />
+            <FaBars size={25} className="block md:hidden" />
           </div>
         </div>
       </Container>

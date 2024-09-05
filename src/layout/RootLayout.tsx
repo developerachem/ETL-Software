@@ -6,7 +6,7 @@ function RootLayout() {
   return (
     <div className="relative h-screen">
       <HeaderTop />
-      <div className="my-[70px]" />
+      <div className="my-[61px] sm:my-[70px]" />
       <Outlet />
       <div className="hidden md:block">
         <HeaderBottom />

@@ -283,3 +283,13 @@ body {
     opacity: 1;
   }
 }
+
+/* Testimonial */
+span.swiper-pagination-bullet {
+  width: 20px;
+  border-radius: 2px;
+  height: 3px;
+}
+span.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background-color: var(--primaryColor);
+}
