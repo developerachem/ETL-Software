@@ -34,7 +34,7 @@ function HeaderBottom() {
               isButton
               children={<ServiceHoverElement />}
             />
-            <List title="Technology" link="/technology" />
+            {/* <List title="Technology" link="/technology" /> */}
             <List title="Portfolio" link="/portfolio" />
             <List title="Blog" link="/blog" />
             <List title="Contact" link="/contact" />
