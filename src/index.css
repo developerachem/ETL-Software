@@ -293,3 +293,12 @@ span.swiper-pagination-bullet {
 span.swiper-pagination-bullet.swiper-pagination-bullet-active {
   background-color: var(--primaryColor);
 }
+
+
+/* ABout CSS */
+.about-banner{
+  background-image: url("./assets/image/about-bg.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: auto;
+}

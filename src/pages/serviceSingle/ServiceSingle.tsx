@@ -464,25 +464,35 @@ function ServiceSingle() {
                     modules={[Autoplay, Pagination, Navigation]}
                   >
                     <SwiperSlide className="flex justify-center items-center">
-                      <SliderBox />
+                      <SliderBox item={{
+                        name: 'RAIHAN SHARIF',
+                        title: 'Assistant Professor, Jahangirnagar University, Bangladesh',
+                        desc: 'Excel Intelligent Solution have thoroughly gone above & beyond to work on solving our problems and automating our solutions here at the Department of IBA at Jahangirnagar University.'
+                      }} />
                     </SwiperSlide>
+
                     <SwiperSlide className="flex justify-center items-center">
-                      <SliderBox />
+                      <SliderBox item={{
+                        name: 'RAKESH MAZUMDER',
+                        title: 'System Architect , Global Miles Ltd Hong Kong',
+                        desc: 'Excel Technologies Ltd. have thoroughly gone above & beyond to work on solving our problems and automating our solutions here at the Department of IBA at Jahangirnagar University.'
+                      }} />
                     </SwiperSlide>
+
                     <SwiperSlide className="flex justify-center items-center">
-                      <SliderBox />
+                      <SliderBox item={{
+                        name: 'JANNATUL FERDOUS',
+                        title: 'Head of IT, Ningbo Cixing Co., Ltd',
+                        desc: 'We’ve been working with many local software companies, however ArcApps from Excel Intelligent Solution is one of the most user-friendly, business focused application we’ve used and now our business process runs at ease!'
+                      }} />
                     </SwiperSlide>
+                    
                     <SwiperSlide className="flex justify-center items-center">
-                      <SliderBox />
-                    </SwiperSlide>
-                    <SwiperSlide className="flex justify-center items-center">
-                      <SliderBox />
-                    </SwiperSlide>
-                    <SwiperSlide className="flex justify-center items-center">
-                      <SliderBox />
-                    </SwiperSlide>
-                    <SwiperSlide className="flex justify-center items-center">
-                      <SliderBox />
+                      <SliderBox item={{
+                        name: 'DANIEL GEORGE',
+                        title: 'Software Engineer, Nexia International London',
+                        desc: 'Excel Technologies Ltd. has an enthusiastic team, hard-working guys who don’t give up easily. They did the job perfectly. They always aim to please and succeeded in doing so. Overall, we’re very happy to get the software from them.'
+                      }} />
                     </SwiperSlide>
                   </Swiper>
                 </div>
@@ -570,17 +580,19 @@ const FeaturesBox = ({ img, title, className }: boxProps) => {
   );
 };
 
-const SliderBox = () => {
+import quoteImage from '../../assets/image/quote.png' 
+
+const SliderBox = ({item}) => {
   return (
     <div className="border shadow-lg p-5 w-[450px] sm:w-[500px] xxl:w-[550px] bg-white rounded-lg relative mt-14 mb-10">
       <img
-        src="https://i.ibb.co/G5yyssZ/Scuare.jpg"
+        src={quoteImage}
         alt=""
-        className="h-[80px] lg:h-[100px] w-[80px] lg:w-[100px] rounded-full border-2 border-primaryColor object-cover absolute -top-12 "
+        className=" p-3 bg-white h-[80px] lg:h-[100px] w-[80px] lg:w-[100px] rounded-full border-2 border-primaryColor object-cover absolute -top-12 "
       />
       <div className="mt-10 flex justify-between">
         <div className="">
-          <h3 className="font-[font-500] text-[20px]">MD Achem</h3>
+          <h3 className="font-[font-500] text-[20px]">{item?.name}</h3>
           <div
             className={`flex justify-between gap-3 w-[150px] items-center mt-3`}
           >
@@ -605,19 +617,17 @@ const SliderBox = () => {
       <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div className="">
           <p className="text-[13px] sm:text-[15px] font-[font-500] text-[#00000099]">
-            Web Developer
+            {item?.title}
           </p>
-          <p className="text-[12px] sm:text-[13px] font-[font-500] text-[#00000099]">
+          {/* <p className="text-[12px] sm:text-[13px] font-[font-500] text-[#00000099]">
             Excel Technology LTD.
-          </p>
+          </p> */}
         </div>
         <p
           className="text-[12px] sm:text-[14px] font-[font-300]"
           style={{ lineHeight: "18px" }}
         >
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam
-          ipsum assumenda dolores provident. Eligendi ex numquam quia cupiditate
-          aperiam ipsum.
+         {item?.desc}
         </p>
       </div>
     </div>
