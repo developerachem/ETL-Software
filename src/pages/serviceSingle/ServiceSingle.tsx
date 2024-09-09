@@ -1,16 +1,7 @@
-import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { loadSlim } from "@tsparticles/slim";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { AiFillStar } from "react-icons/ai";
-import {
-  FaAppStoreIos,
-  FaApple,
-  FaGooglePlay,
-  FaMinus,
-  FaPlus,
-} from "react-icons/fa";
-import { IoLogoAndroid } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { FaMinus, FaPlus } from "react-icons/fa";
+import { Link, useLocation } from "react-router-dom";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Title from "../../components/title/Title";
@@ -19,45 +10,36 @@ import { URLContact } from "../../routes/url";
 import { styles } from "../../utils/cn";
 
 function ServiceSingle() {
-  const [init, setInit] = useState(false);
   const [active, setActive] = useState("frontend");
-  const [check, setCheck] = useState(0);
+  const [accordionShow, setAccordionShow] = useState(0);
 
-  // * Particl Initiate
-  useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
-    }).then(() => {
-      setInit(false);
-    });
-  }, []);
+  // * Hokes
+  const { pathname } = useLocation();
+
+  // * Service Page Data
+  const data = serviceData.filter((value) =>
+    pathname.toLowerCase().includes(value.url.toLowerCase())
+  )[0];
+
+  console.log(data);
 
   return (
     <>
       <div className="h-[70vh] relative bg-[#F4F5FA]">
         <Container>
           <div className="w-full md:w-[60%] ">
-            <h1 className="font-[font-it] text-[30px] md:text-[50px] xl:text-[60px] text-primaryColor mb-5 text-center md:text-left">
-              Building Mobile Apps That Make an Impact
+            <h1 className="font-[font-it] text-[30px] md:text-[50px] xl:text-[55px] text-primaryColor mb-5 text-center md:text-left">
+              {data?.hero?.title}
             </h1>
             <h1 className="text-[15px] sm:text-[17px] md:text-[20px] lg:text-[25px] xl:text-[35px] font-[font-500] text-center md:text-left">
-              Custom mobile solutions designed to engage users and drive growth.
+              {data?.hero?.subtitle}
             </h1>
 
-            <ul className="flex justify-center md:justify-start items-center gap-2 mt-10">
+            <ul className="flex justify-center md:justify-start items-center gap-5 mt-10">
               <li>-----</li>
-              <li>
-                <FaApple size={25} />
-              </li>
-              <li>
-                <IoLogoAndroid size={25} />
-              </li>
-              <li>
-                <FaGooglePlay size={20} />
-              </li>
-              <li>
-                <FaAppStoreIos size={20} />
-              </li>
+              {data?.hero.icon?.map((i, e) => (
+                <li key={e}>{i}</li>
+              ))}
             </ul>
           </div>
         </Container>
@@ -76,95 +58,19 @@ function ServiceSingle() {
             <div className="h-[50px] md:h-[80px] xl:h-[100px] 2xl:h-[120px]  w-[50px] md:w-[80px] xl:w-[100px] 2xl:w-[120px] absolute z-10 rounded-full waves wave-3 pointer-events-none" />
           </div>
         </div>
-
-        <div className="relative overflow-hidden w-full">
-          {init && (
-            <section
-              style={{
-                width: "500px",
-                height: "300px",
-                position: "relative",
-                overflow: "hidden",
-              }}
-            >
-              <Particles
-                id="tsparticles"
-                options={{
-                  interactivity: {
-                    events: {
-                      onClick: {
-                        enable: true,
-                        mode: "push",
-                      },
-                    },
-                  },
-                  particles: {
-                    color: {
-                      value: "#00000020",
-                    },
-                    links: {
-                      color: "#00000020",
-                      distance: 150,
-                      enable: true,
-                      opacity: 0.1,
-                      width: 1,
-                    },
-                    move: {
-                      direction: "none",
-                      enable: true,
-                      outModes: {
-                        default: "bounce",
-                      },
-                      random: false,
-                      speed: 2,
-                      straight: false,
-                    },
-                    number: {
-                      density: {
-                        enable: true,
-                      },
-                      value: 120,
-                    },
-                    opacity: {
-                      value: 0.2,
-                    },
-                    shape: {
-                      type: "circle",
-                    },
-                    size: {
-                      value: { min: 1, max: 2 },
-                    },
-                  },
-                }}
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                }}
-              />
-            </section>
-          )}
-        </div>
       </div>
 
       <div className="py-[100px] bg-primaryColor">
         <Container>
           <div className="w-full">
             <Title
-              title="Your Partner in Mobile App Innovation"
+              title={data?.experiences?.title}
               titleClass="text-white text-center"
               booletClass="bg-[#ffffff70]"
             />
 
             <p className="mt-5 text-center text-[#ffffff] text-[17px] w-full xsm:w-[80%] md:w-[60%] m-auto">
-              We craft mobile apps that captivate users and fuel business
-              growth. Whether it’s a robust native app for iOS or Android, or a
-              flexible cross-platform solution, our expert developers are here
-              to bring your vision to life. With a focus on intuitive design and
-              top-notch performance, we build apps that enhance your digital
-              presence and deliver outstanding user experiences.
+              {data?.experiences?.desc}
             </p>
           </div>
         </Container>
@@ -173,69 +79,61 @@ function ServiceSingle() {
       <div className="py-[100px] bg-[#F4F5FA]">
         <Container>
           <div className="w-full">
-            <Title title="Why Hire Developers From Excel ?" />
+            <Title title="What we offer" />
 
             <div className="mt-10 grid grid-cols-1 xsm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-5">
               <div className="p-5 border bg-[#E8ECF5] text-center py-10">
-                <h1 className="font-[font-500]">Title</h1>
+                <h1 className="font-[font-500]">{data?.offer[0]?.title}</h1>
                 <p className="text-[14px] sm:text-[17px] mt-5">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Recusandae, debitis! Autem facere illum veniam deserunt.
+                  {data?.offer[0]?.desc}
                 </p>
               </div>
 
               <div className="p-5 border  text-center py-10 bg-white">
-                <h1 className="font-[font-500]">Title</h1>
+                <h1 className="font-[font-500]">{data?.offer[1]?.title}</h1>
                 <p className="text-[14px] sm:text-[17px] mt-5">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Recusandae, debitis! Autem facere illum veniam deserunt.
+                  {data?.offer[1]?.desc}
                 </p>
               </div>
 
               <div className="p-5 border bg-[#E8ECF5] xsm:bg-white xl:bg-[#E8ECF5] text-center py-10">
-                <h1 className="font-[font-500]">Title</h1>
+                <h1 className="font-[font-500]">{data?.offer[2]?.title}</h1>
                 <p className="text-[14px] sm:text-[17px] mt-5">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Recusandae, debitis! Autem facere illum veniam deserunt.
+                  {data?.offer[2]?.desc}
                 </p>
               </div>
 
               <div className="p-5 border  text-center py-10 bg-white xsm:bg-[#E8ECF5] xl:bg-white">
-                <h1 className="font-[font-500]">Title</h1>
+                <h1 className="font-[font-500]">{data?.offer[3]?.title}</h1>
                 <p className="text-[14px] sm:text-[17px] mt-5">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Recusandae, debitis! Autem facere illum veniam deserunt.
+                  {data?.offer[3]?.desc}
                 </p>
               </div>
 
               <div className="p-5 border text-center py-10 bg-[#E8ECF5] xl:bg-white">
-                <h1 className="font-[font-500]">Title</h1>
+                <h1 className="font-[font-500]">{data?.offer[4]?.title}</h1>
                 <p className="text-[14px] sm:text-[17px] mt-5">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Recusandae, debitis! Autem facere illum veniam deserunt.
+                  {data?.offer[4]?.desc}
                 </p>
               </div>
 
               <div className="p-5 border bg-white xl:bg-[#E8ECF5] text-center py-10">
-                <h1 className="font-[font-500]">Title</h1>
+                <h1 className="font-[font-500]">{data?.offer[5]?.title}</h1>
                 <p className="text-[14px] sm:text-[17px] mt-5">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Recusandae, debitis! Autem facere illum veniam deserunt.
+                  {data?.offer[5]?.desc}
                 </p>
               </div>
 
               <div className="p-5 border text-center py-10 bg-[#E8ECF5] xsm:bg-white">
-                <h1 className="font-[font-500]">Title</h1>
+                <h1 className="font-[font-500]">{data?.offer[6]?.title}</h1>
                 <p className="text-[14px] sm:text-[17px] mt-5">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Recusandae, debitis! Autem facere illum veniam deserunt.
+                  {data?.offer[6]?.desc}
                 </p>
               </div>
               <div className="p-5 border bg-white xsm:bg-[#E8ECF5] text-center py-10">
-                <h1 className="font-[font-500]">Title</h1>
+                <h1 className="font-[font-500]">{data?.offer[7]?.title}</h1>
                 <p className="text-[14px] sm:text-[17px] mt-5">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Recusandae, debitis! Autem facere illum veniam deserunt.
+                  {data?.offer[7]?.desc}
                 </p>
               </div>
             </div>
@@ -246,46 +144,49 @@ function ServiceSingle() {
       <div className="bg-[#E8ECF5] py-[100px]">
         <Container>
           <div className="w-full ">
-            <Title title="Technology" />
+            <Title title="Technologies Used in Web Development" />
 
             <div className="shadow-md mt-10 p-5 lg:p-10 w-full lg:w-[80%] xxl:w-[60%] m-auto border border-color500 rounded-xl relative z-10">
               <ul className="flex justify-around border-b border-b-color500">
-                <li>
-                  <button
-                    className={styles(
-                      "py-1 lg:py-2 px-2 lg:px-4 text-[15px] lg:text-[18px] font-[font-500] border-b-4 ",
-                      { "border-b-primaryColor": active === "frontend" }
-                    )}
-                    onClick={() => setActive("frontend")}
-                  >
-                    Frontend
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className={styles(
-                      "py-1 lg:py-2 px-2 lg:px-4 text-[15px] lg:text-[18px] font-[font-500] border-b-4 ",
-                      { "border-b-primaryColor": active === "backend" }
-                    )}
-                    onClick={() => setActive("backend")}
-                  >
-                    Backend
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className={styles(
-                      "py-1 lg:py-2 px-2 lg:px-4 text-[15px] lg:text-[18px] font-[font-500] border-b-4 ",
-                      { "border-b-primaryColor": active === "platform" }
-                    )}
-                    onClick={() => setActive("platform")}
-                  >
-                    Platform
-                  </button>
-                </li>
+                {data?.technologies?.map((item, index) => (
+                  <li key={index}>
+                    <button
+                      className={styles(
+                        "py-1 lg:py-2 px-2 lg:px-4 text-[15px] lg:text-[18px] font-[font-500] border-b-4 ",
+                        {
+                          "border-b-primaryColor":
+                            active === item?.key?.toLowerCase(),
+                        }
+                      )}
+                      onClick={() => setActive(item?.key?.toLowerCase())}
+                    >
+                      {item?.label}
+                    </button>
+                  </li>
+                ))}
               </ul>
 
-              {active === "frontend" && (
+              <div className="pt-5 grid grid-cols-2 xsm:grid-cols-3 md:grid-cols-4 gap-2">
+                {data?.technologies
+                  ?.filter((i) => i?.key?.toLowerCase() === active)[0]
+                  ?.option?.map((item, index) => {
+                    return (
+                      <div
+                        key={index}
+                        className={styles(
+                          "flex flex-col items-center p-1 md:p-3 py-5 md:py-10 transition-opacity"
+                        )}
+                      >
+                        {item?.icon}
+                        <h1 className="text-[16px] font-[font-400] text-center mt-3">
+                          {item?.name}
+                        </h1>
+                      </div>
+                    );
+                  })}
+              </div>
+
+              {/* {active === "frontend" && (
                 <div className="pt-5 grid grid-cols-2 xsm:grid-cols-3 md:grid-cols-4 gap-2">
                   <div
                     className={styles(
@@ -381,7 +282,7 @@ function ServiceSingle() {
                     </h1>
                   </div>
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </Container>
@@ -391,28 +292,28 @@ function ServiceSingle() {
         <Container>
           <div className="w-full">
             {/* <div className="flex"> */}
-            <Title title="Key Features" />
+            <Title title="Web Development Workflow" />
             {/* </div> */}
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 mt-20 w-full">
               <FeaturesBox
                 img="https://d2e3cmtjkfw2a3.cloudfront.net/static/media/sub-services/doller.png"
-                title="Cost Effective"
+                title="Requirement Gathering and Analysis"
                 className="sr_line_1"
               />
               <FeaturesBox
                 img="https://d2e3cmtjkfw2a3.cloudfront.net/static/media/sub-services/doller1.png"
-                title="High Performance"
+                title="Planning & Design"
                 className="sr_line_2"
               />
               <FeaturesBox
                 img="https://d2e3cmtjkfw2a3.cloudfront.net/static/media/sub-services/doller2.png"
-                title="Web Support"
+                title="Development & Testing"
                 className="sr_line_3"
               />
               <FeaturesBox
                 img="https://d2e3cmtjkfw2a3.cloudfront.net/static/media/sub-services/doller3.png"
-                title="Open Source"
+                title="Deployment"
                 className="sr_line_4"
               />
             </div>
@@ -451,7 +352,6 @@ function ServiceSingle() {
                   <Swiper
                     spaceBetween={50}
                     slidesPerView={1}
-                    onSlideChange={() => console.log("slide change")}
                     onSwiper={(swiper) => console.log({ swiper })}
                     pagination={{
                       clickable: true,
@@ -465,7 +365,7 @@ function ServiceSingle() {
                   >
                     <SwiperSlide className="flex justify-center items-center">
                       <SliderBox
-                        item={{
+                        content={{
                           name: "RAIHAN SHARIF",
                           title:
                             "Assistant Professor, Jahangirnagar University, Bangladesh",
@@ -476,7 +376,7 @@ function ServiceSingle() {
 
                     <SwiperSlide className="flex justify-center items-center">
                       <SliderBox
-                        item={{
+                        content={{
                           name: "RAKESH MAZUMDER",
                           title:
                             "System Architect , Global Miles Ltd Hong Kong",
@@ -487,7 +387,7 @@ function ServiceSingle() {
 
                     <SwiperSlide className="flex justify-center items-center">
                       <SliderBox
-                        item={{
+                        content={{
                           name: "JANNATUL FERDOUS",
                           title: "Head of IT, Ningbo Cixing Co., Ltd",
                           desc: "We’ve been working with many local software companies, however ArcApps from Excel Intelligent Solution is one of the most user-friendly, business focused application we’ve used and now our business process runs at ease!",
@@ -497,7 +397,7 @@ function ServiceSingle() {
 
                     <SwiperSlide className="flex justify-center items-center">
                       <SliderBox
-                        item={{
+                        content={{
                           name: "DANIEL GEORGE",
                           title:
                             "Software Engineer, Nexia International London",
@@ -520,11 +420,16 @@ function ServiceSingle() {
 
             <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div className="">
-                {test.map((_, index) => {
+                {data?.faq?.map((i, index) => {
                   return (
                     <React.Fragment key={index}>
                       {index % 2 ? null : (
-                        <Faq index={index} check={check} setCheck={setCheck} />
+                        <Faq
+                          index={index}
+                          accordionShow={accordionShow}
+                          setAccordionShow={setAccordionShow}
+                          item={i}
+                        />
                       )}
                     </React.Fragment>
                   );
@@ -532,11 +437,16 @@ function ServiceSingle() {
               </div>
 
               <div className="">
-                {test.map((_, index) => {
+                {data?.faq?.map((i, index) => {
                   return (
                     <React.Fragment key={index}>
                       {index % 2 ? (
-                        <Faq index={index} check={check} setCheck={setCheck} />
+                        <Faq
+                          index={index}
+                          accordionShow={accordionShow}
+                          setAccordionShow={setAccordionShow}
+                          item={i}
+                        />
                       ) : null}
                     </React.Fragment>
                   );
@@ -553,8 +463,6 @@ function ServiceSingle() {
 }
 
 export default ServiceSingle;
-
-const test = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 interface boxProps {
   img?: string;
@@ -592,13 +500,16 @@ const FeaturesBox = ({ img, title, className }: boxProps) => {
 };
 
 import quoteImage from "../../assets/image/quote.png";
+import serviceData from "./serviceData";
 
 interface SidebarProps {
-  name: string;
-  title: string;
-  desc: string;
+  content: {
+    name: string;
+    title: string;
+    desc: string;
+  };
 }
-const SliderBox = ({ item }: SidebarProps) => {
+const SliderBox = ({ content }: SidebarProps) => {
   return (
     <div className="border shadow-lg p-5 w-[450px] sm:w-[500px] xxl:w-[550px] bg-white rounded-lg relative mt-14 mb-10">
       <img
@@ -608,7 +519,7 @@ const SliderBox = ({ item }: SidebarProps) => {
       />
       <div className="mt-10 flex justify-between">
         <div className="">
-          <h3 className="font-[font-500] text-[20px]">{item?.name}</h3>
+          <h3 className="font-[font-500] text-[20px]">{content?.name}</h3>
           <div
             className={`flex justify-between gap-3 w-[150px] items-center mt-3`}
           >
@@ -633,7 +544,7 @@ const SliderBox = ({ item }: SidebarProps) => {
       <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div className="">
           <p className="text-[13px] sm:text-[15px] font-[font-500] text-[#00000099]">
-            {item?.title}
+            {content?.title}
           </p>
           {/* <p className="text-[12px] sm:text-[13px] font-[font-500] text-[#00000099]">
             Excel Technology LTD.
@@ -643,7 +554,7 @@ const SliderBox = ({ item }: SidebarProps) => {
           className="text-[12px] sm:text-[14px] font-[font-300]"
           style={{ lineHeight: "18px" }}
         >
-          {item?.desc}
+          {content?.desc}
         </p>
       </div>
     </div>
@@ -651,17 +562,21 @@ const SliderBox = ({ item }: SidebarProps) => {
 };
 
 interface FaqProps {
-  setCheck: React.Dispatch<React.SetStateAction<number>>;
-  check: number;
+  setAccordionShow: React.Dispatch<React.SetStateAction<number>>;
+  accordionShow: number;
   index: number;
+  item: {
+    title: string;
+    desc: string;
+  };
 }
-const Faq = ({ index, check, setCheck }: FaqProps) => {
+const Faq = ({ index, accordionShow, setAccordionShow, item }: FaqProps) => {
   // * Handle Accordion Toggle
   const handleAccordion = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (Number(e.target.value) === check) {
-      setCheck(0);
+    if (Number(e.target.value) === accordionShow) {
+      setAccordionShow(0);
     } else {
-      setCheck(Number(e.target.value));
+      setAccordionShow(Number(e.target.value));
     }
   };
 
@@ -673,13 +588,13 @@ const Faq = ({ index, check, setCheck }: FaqProps) => {
           onClick={(e) => handleAccordion(e)}
           className={styles(
             "py-3 px-5 flex justify-between items-center cursor-pointer w-full",
-            { "border-b": check === index + 1 }
+            { "border-b": accordionShow === index + 1 }
           )}
         >
           <p className="font-[font-500] text-[17px] pointer-events-none">
-            Title {index + 1}
+            {item?.title}
           </p>
-          {check === index + 1 ? (
+          {accordionShow === index + 1 ? (
             <FaMinus size={15} className="pointer-events-none" />
           ) : (
             <FaPlus size={15} className="pointer-events-none" />
@@ -690,17 +605,13 @@ const Faq = ({ index, check, setCheck }: FaqProps) => {
           className={styles(
             "grid overflow-hidden p-5 transition-all duration-300 ease-out",
             {
-              "grid-rows-[1fr] opacity-100": check === index + 1,
-              "grid-rows-[0fr] opacity-0 p-0": check !== index + 1,
+              "grid-rows-[1fr] opacity-100": accordionShow === index + 1,
+              "grid-rows-[0fr] opacity-0 p-0": accordionShow !== index + 1,
             }
           )}
-          // style={{ transition: "all 1s ease-in-out" }}
         >
           <p className=" font-[font-300] text-[15px] overflow-hidden">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-            provident quod accusantium expedita esse ad autem tempora facilis
-            vel est! Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-            Molestiae, dolorum.
+            {item?.desc}
           </p>
         </div>
       </div>

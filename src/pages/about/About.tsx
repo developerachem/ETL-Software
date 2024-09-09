@@ -1,3 +1,5 @@
+import bannerImage from "../../assets/image/about-banner.png";
+import vison from "../../assets/image/vision.jpg";
 import Title from "../../components/title/Title";
 import Container from "../../container/Container";
 
@@ -28,11 +30,7 @@ function About() {
               </div>
 
               <div className="flex justify-end">
-                <img
-                  className="w-[75%]"
-                  src="https://cdn-dpdal.nitrocdn.com/GyhcCIiZNdTIbeWlnyLmouvoGPRcWSwV/assets/images/optimized/rev-7e2888a/www.emizentech.com/wp-content/uploads/2024/02/about-us-570x0.png"
-                  alt=""
-                />
+                <img className="w-[100%]" src={bannerImage} alt="" />
               </div>
             </div>
           </div>
@@ -237,12 +235,12 @@ function About() {
 
       <div className="py-[100px]">
         <Container>
-          <div className="w-full grid grid-cols-2 gap-10">
+          <div className="w-full grid grid-cols-2 gap-10 items-center">
             <div className="">
               <img
-                src="https://cdn-dpdal.nitrocdn.com/GyhcCIiZNdTIbeWlnyLmouvoGPRcWSwV/assets/images/optimized/rev-7e2888a/www.emizentech.com/wp-content/themes/twentytwentyone-child/assets/images/vision-mission.jpg"
+                src={vison}
                 alt=""
-                className="rounded-lg"
+                className="rounded-lg w-[90%] shadow-lg p-5"
               />
             </div>
             <div className="">
@@ -254,7 +252,7 @@ function About() {
 
               <div className="flex gap-5 items-start mt-5">
                 <img
-                  className="bg-[#d5ede5] p-6 rounded-lg h-[80px] w-[80px]"
+                  className="bg-[#d5ede5] p-6 rounded-lg h-[80px] w-[80px] "
                   src="https://cdn-dpdal.nitrocdn.com/GyhcCIiZNdTIbeWlnyLmouvoGPRcWSwV/assets/images/optimized/rev-7e2888a/www.emizentech.com/wp-content/themes/twentytwentyone-child/assets/images/mission-icon.png"
                   alt=""
                 />
