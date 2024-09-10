@@ -4,6 +4,10 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Development from "../../assets/image/Development.png";
+import Requirement from "../../assets/image/Requirement.png";
+import development from "../../assets/image/development.png";
+import planing from "../../assets/image/planing.png";
 import Title from "../../components/title/Title";
 import Container from "../../container/Container";
 import { URLContact } from "../../routes/url";
@@ -297,22 +301,22 @@ function ServiceSingle() {
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 mt-20 w-full">
               <FeaturesBox
-                img="https://d2e3cmtjkfw2a3.cloudfront.net/static/media/sub-services/doller.png"
+                img={Requirement}
                 title="Requirement Gathering and Analysis"
                 className="sr_line_1"
               />
               <FeaturesBox
-                img="https://d2e3cmtjkfw2a3.cloudfront.net/static/media/sub-services/doller1.png"
+                img={planing}
                 title="Planning & Design"
                 className="sr_line_2"
               />
               <FeaturesBox
-                img="https://d2e3cmtjkfw2a3.cloudfront.net/static/media/sub-services/doller2.png"
+                img={development}
                 title="Development & Testing"
                 className="sr_line_3"
               />
               <FeaturesBox
-                img="https://d2e3cmtjkfw2a3.cloudfront.net/static/media/sub-services/doller3.png"
+                img={Development}
                 title="Deployment"
                 className="sr_line_4"
               />
@@ -476,7 +480,7 @@ const FeaturesBox = ({ img, title, className }: boxProps) => {
         <img
           src={img}
           alt=""
-          className="w-[80px] lg:w-[100px] xl:w-[150px] h-[80px] lg:h-[100px] xl:h-[150px] object-content"
+          className="w-[80px] border rounded-full border-primaryColor shadow lg:w-[100px] xl:w-[150px] h-[80px] lg:h-[100px] xl:h-[150px] object-content"
         />
 
         <div

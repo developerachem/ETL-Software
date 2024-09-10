@@ -294,11 +294,104 @@ span.swiper-pagination-bullet.swiper-pagination-bullet-active {
   background-color: var(--primaryColor);
 }
 
-
 /* ABout CSS */
-.about-banner{
+.about-banner {
   background-image: url("./assets/image/about-bg.png");
   background-repeat: no-repeat;
   background-position: right;
   background-size: auto;
+}
+
+/* Contact Page */
+.contact-page {
+  background-image: url("./assets/image/contact-page-bg.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100vh;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0000008f;
+  z-index: -1;
+}
+
+/* Portfolio */
+.portfolio-box img {
+  transition: 0.5s;
+}
+.portfolio-box:hover img {
+  transform: translateY(55px);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.portfolio-box .content {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px;
+  transform: translateY(25px);
+  transition: 0.5s;
+}
+
+.portfolio-box:hover .content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.blog-triangle-top-left::after {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 50px 50px 0 0;
+  border-color: var(--primaryColor) transparent transparent transparent;
+  line-height: 0;
+  _border-color: var(--primaryColor) #000000 #000000 #000000;
+  _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translateY(50px) translateX(50px);
+  transition: 0.3s;
+  box-shadow: 0 0 20px black;
+}
+
+.blog-triangle-top-left::before {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 50px 50px;
+  border-color: transparent transparent #fff transparent;
+  line-height: 0;
+  _border-color: #000000 #000000 #fff #000000;
+  _filter: progid:DXImageTransform.Microsoft.Chroma(color='#000000');
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translateY(50px) translateX(50px);
+  transition: 0.3s;
+}
+
+.blog-box:hover .blog-triangle-top-left::after,
+.blog-box:hover .blog-triangle-top-left::before {
+  transform: translateY(0) translateX(0);
 }
