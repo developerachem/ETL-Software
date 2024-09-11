@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import ArcAnalytics from "../../assets/image/portfolio/ArcAnalytics.png";
 import ArcApps from "../../assets/image/portfolio/ArcApps.png";
 import ArcPOS from "../../assets/image/portfolio/ArcPOS.png";
@@ -10,13 +11,17 @@ import Title from "../../components/title/Title";
 import Container from "../../container/Container";
 
 function Portfolio() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="pt-24 bg-[#F4F5FA] pb-44">
       <Container>
         <div className="w-full">
           <Title title="Portfolio" />
 
-          <div className="mt-24 grid grid-cols-2 xl:grid-cols-3 gap-5 w-full">
+          <div className="mt-24 grid sm:grid-cols-2 xl:grid-cols-3 gap-5 w-full">
             <PortfolioBox
               item={{
                 title: "SmartCare Pro",

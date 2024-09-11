@@ -70,34 +70,31 @@ function BannerSlider() {
       slideTo();
     });
 
-    setInterval(() => {
-      if (active === sliderItems.length - 1) {
-        active = 0;
-      }
-      active = active + 1 < sliderItems.length ? active + 1 : active;
-      slideTo();
-      // clearInterval(interval);
-    }, 4000);
+    // setInterval(() => {
+    //   if (active === sliderItems.length - 1) {
+    //     active = 0;
+    //   }
+    //   active = active + 1 < sliderItems.length ? active + 1 : active;
+    //   slideTo();
+    //   // clearInterval(interval);
+    // }, 5000);
   }, []);
 
   return (
-    <div className="w-[50%] h-[100%] flex justify-end items-center relative">
+    <div className="w-full md:w-[50%] h-[100%] flex justify-center items-center relative">
       <div className="h-[80%] w-[80%] mb-5 overflow-hidden flex flex-col justify-center items-center relative">
         {bannerArray.map((item, index) => (
           <React.Fragment key={index}>{item.mobile}</React.Fragment>
         ))}
       </div>
 
-      <div className="absolute w-[350px] h-[200px] bg-white rounded-[25px] p-5 bottom-24 left-0 shadow-lg border z-10">
-        <div className="w-full h-[120px] overflow-hidden relative">
+      <div className="absolute w-[80%] sm:w-[50%] md:w-[350px] h-[160px] md:h-[200px] bg-white rounded-[25px] p-5 bottom-3 md:bottom-24 md:left-0 shadow-lg border z-10">
+        <div className="w-full h-[100px] md:h-[120px] overflow-hidden relative">
           {bannerArray.map((item, index) => (
             <div className="w-full h-full absolute sliderContent">
               <React.Fragment key={index}>
                 {item.logo}
-                <h3
-                  className="font-[font-500] text-[#35505C]"
-                  style={{ lineHeight: "25px" }}
-                >
+                <h3 className="font-[font-400] md:font-[font-500] text-[#35505C] text-[13px] md:text-[18px] leading-[16px] md:leading-[25px]">
                   {item.content}
                 </h3>
               </React.Fragment>
@@ -105,7 +102,7 @@ function BannerSlider() {
           ))}
         </div>
 
-        <div className="flex justify-end items-center gap-5 mt-5 text-gray-400">
+        <div className="flex justify-end items-center gap-5 mt-2 text-gray-400">
           <HiOutlineArrowNarrowLeft
             id="prevBtn"
             size={23}
@@ -121,7 +118,7 @@ function BannerSlider() {
 
       <img
         src={bodyImage}
-        className="absolute bottom-0 h-[140px] right-10 w-[400px] object-content"
+        className="absolute bottom-0 h-[70px] sm:h-[100px] md:h-[140px] md:right-10 w-[400px] object-content"
       />
     </div>
   );

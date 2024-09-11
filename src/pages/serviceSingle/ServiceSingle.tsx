@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
@@ -584,6 +584,10 @@ const Faq = ({ index, accordionShow, setAccordionShow, item }: FaqProps) => {
     }
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="mb-5">
       <div className="border rounded flex flex-col">
@@ -591,11 +595,11 @@ const Faq = ({ index, accordionShow, setAccordionShow, item }: FaqProps) => {
           value={index + 1}
           onClick={(e) => handleAccordion(e)}
           className={styles(
-            "py-3 px-5 flex justify-between items-center cursor-pointer w-full",
+            "py-3 px-5 flex justify-between items-center cursor-pointer w-full text-left",
             { "border-b": accordionShow === index + 1 }
           )}
         >
-          <p className="font-[font-500] text-[17px] pointer-events-none">
+          <p className="font-[font-500] text-[15px] md:text-[17px] pointer-events-none">
             {item?.title}
           </p>
           {accordionShow === index + 1 ? (

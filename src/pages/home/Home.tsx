@@ -1,5 +1,7 @@
 import { TiArrowBackOutline } from "react-icons/ti";
 import { Link } from "react-router-dom";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import ai from "../../assets/image/ai.jpg";
 import dataEng from "../../assets/image/data-eng.jpg";
 import devops from "../../assets/image/devops.jpg";
@@ -11,34 +13,45 @@ import Title from "../../components/title/Title";
 import Container from "../../container/Container";
 
 function Home() {
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
+
   return (
     <>
       <div className="banner">
         <Container>
-          <div className="flex flex-col md:flex-row justify-between items-center w-full h-[70vh] md:h-[85vh] ">
+          <div className="flex flex-col md:flex-row justify-between items-center w-full h-[650px] sm:h-[700px] md:h-[85vh] ">
             <div className="w-full md:w-[50%]">
-              <h1 className="text-[40px] md:text-[50px] lg:text-[60px] xl:text-[70px] text-[#153441] font-[font-500]">
-                $869 M funding{" "}
-              </h1>
-              <h1 className="-mt-5 text-[40px] md:text-[50px] lg:text-[60px] xl:text-[70px] text-[#153441] font-[font-500]">
-                raised by our apps
-              </h1>
-              <h1 className="text-[40px] md:text-[50px] lg:text-[60px] xl:text-[70px] text-primaryColor font-[font-It]">
-                in 1 year!
-              </h1>
+              <div className="flex md:block justify-start mt-10 md:mt-0">
+                <h1 className="text-[30px] sm:text-[40px] md:text-[50px] lg:text-[60px] text-left xl:text-[70px] text-[#153441] font-[font-500] leading-[30px] md:leading-[50px] m xl:leading-[60px] mb-5">
+                  $869 M funding raised by our apps
+                  <span className="ml-3 md:ml-0 text-[30px] sm:text-[40px] md:text-[50px] md:block lg:text-[60px] xl:text-[70px] text-center md:text-left text-primaryColor font-[font-It]">
+                    in 1 year!
+                  </span>
+                </h1>
+              </div>
 
-              <Link
-                to="/"
-                className="btn mt-5 rounded-full bg-primaryColor border-primaryColor hover:bg-color800  px-8"
-              >
-                <div className="flex items-center gap-3 font-[font-600] text-[16px] text-white">
-                  Learn More
-                  <TiArrowBackOutline
-                    size={25}
-                    className="rotate-[130deg] text-white"
-                  />
-                </div>
-              </Link>
+              <p className="text-[14px] md:text-[16px]">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
+                est veritatis sit numquam blanditiis magnam quos ex labore ea
+                similique in ipsam a, veniam repellat accusantium.
+              </p>
+
+              {/* <div className="text-center md:text-left">
+                <Link
+                  to="/"
+                  className="btn mt-5 rounded-full bg-primaryColor border-primaryColor hover:bg-color800  px-8"
+                >
+                  <div className="flex items-center gap-3 font-[font-600] text-[16px] text-white">
+                    Learn More
+                    <TiArrowBackOutline
+                      size={25}
+                      className="rotate-[130deg] text-white"
+                    />
+                  </div>
+                </Link>
+              </div> */}
             </div>
 
             <BannerSlider />
@@ -52,10 +65,10 @@ function Home() {
             <Title
               title="Our Services"
               titleClass="text-white"
-              booletClass="bg-[#ffffff50]"
+              booletClass="bg-[#ffffff77]"
             />
 
-            <div className="mt-10 grid grid-cols-3 gap-10">
+            <div className="mt-10 grid sm:grid-cols-2 xl:grid-cols-3 gap-5 md:gap-10">
               <ServiceBox
                 content={{
                   name: "Web App Development",
@@ -109,7 +122,111 @@ function Home() {
         </Container>
       </div>
 
-      <div className="h-[100px]" />
+      <div className="py-[100px]">
+        <Container>
+          <div className="w-full">
+            <div className="flex gap-5  items-end">
+              <Swiper
+                breakpoints={{
+                  320: { slidesPerView: 1, spaceBetween: 20 },
+                  480: { slidesPerView: 2, spaceBetween: 20 },
+                  768: { slidesPerView: 3, spaceBetween: 20 },
+                  1024: { slidesPerView: 4, spaceBetween: 20 },
+                  1100: { slidesPerView: 5, spaceBetween: 20 },
+                  1350: { slidesPerView: 6, spaceBetween: 20 },
+                }}
+                // spaceBetween={50}
+                // slidesPerView={6}
+                onSwiper={(swiper) => console.log({ swiper })}
+                // pagination={{
+                //   clickable: true,
+                // }}
+                loop={true}
+                autoplay={{
+                  delay: 2500,
+                  disableOnInteraction: false,
+                }}
+                modules={[Autoplay, Pagination, Navigation]}
+              >
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+                <SwiperSlide className="flex justify-center items-center">
+                  <SliderBox />
+                </SwiperSlide>
+              </Swiper>
+            </div>
+          </div>
+        </Container>
+      </div>
+
+      <div className="lg:h-[100px]" />
     </>
   );
 }
@@ -155,6 +272,20 @@ const ServiceBox = ({ content }: serviceProps) => {
           </Link>
         </div>
       </div>
+    </div>
+  );
+};
+
+// Slider Box
+const SliderBox = () => {
+  return (
+    <div className="bg-white hover:bg-red-400 p-5 shadow border w-full flex flex-col justify-center items-center gap-5 mb-10 rounded-lg">
+      <img
+        src="https://cdn-dpdal.nitrocdn.com/GyhcCIiZNdTIbeWlnyLmouvoGPRcWSwV/assets/images/optimized/rev-7e2888a/www.emizentech.com/wp-content/uploads/2024/03/badge_3-104x0.png"
+        alt=""
+        className="w-[70%] object-contain"
+      />
+      <h1 className="font-[font-500]">IHM Africa</h1>
     </div>
   );
 };

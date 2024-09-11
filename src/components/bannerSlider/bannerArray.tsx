@@ -10,7 +10,7 @@ export const bannerArray = [
       <img
         src={image1}
         alt=""
-        className="h-[50%] md:h-[80%] absolute sliderItem pointer-events-none"
+        className="h-[80%] sm:h-[50%] md:h-[80%] absolute sliderItem pointer-events-none"
       />
     ),
     logo: <img src={logo} className="h-[50px] w-[60px]" alt="" />,
@@ -22,7 +22,7 @@ export const bannerArray = [
       <img
         src={image2}
         alt=""
-        className="h-[50%] md:h-[80%] absolute sliderItem pointer-events-none"
+        className="h-[80%] sm:h-[50%] md:h-[80%] absolute sliderItem pointer-events-none"
       />
     ),
     logo: <img src={logo} className="h-[50px] w-[60px]" alt="" />,
@@ -33,7 +33,7 @@ export const bannerArray = [
       <img
         src={image3}
         alt=""
-        className="h-[50%] md:h-[80%] absolute sliderItem pointer-events-none"
+        className="h-[80%] sm:h-[50%] md:h-[80%] absolute sliderItem pointer-events-none"
       />
     ),
     logo: <img src={logo} className="h-[50px] w-[60px]" alt="" />,
@@ -44,7 +44,7 @@ export const bannerArray = [
       <img
         src={image4}
         alt=""
-        className="h-[50%] md:h-[80%] absolute sliderItem pointer-events-none"
+        className="h-[80%] sm:h-[50%] md:h-[80%] absolute sliderItem pointer-events-none"
       />
     ),
     logo: <img src={logo} className="h-[50px] w-[60px]" alt="" />,
