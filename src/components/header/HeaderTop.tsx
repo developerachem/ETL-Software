@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaAngleDown, FaAngleUp, FaBars, FaTimes } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { IoCall } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import logo from "../../assets/image/logo.png";
 import Container from "../../container/Container";
+import serviceData from "../../pages/serviceSingle/serviceData";
 import { URLContact } from "../../routes/url";
 import { styles } from "../../utils/cn";
 
 function HeaderTop() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdown, setDropdown] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -84,39 +86,61 @@ function HeaderTop() {
           <FaTimes color="#fff" onClick={() => setIsOpen(false)} size={30} />
         </div>
 
-        <div className="flex flex-col gap-5 p-6">
+        <div className="flex flex-col p-6">
           <Link
             onClick={() => setIsOpen(false)}
             to="/"
-            className="font-[font-400] flex items-center gap-3 text-black"
+            className="font-[font-400] flex items-center gap-3 text-black pt-2 pb-2"
           >
             Home
           </Link>
           <Link
             onClick={() => setIsOpen(false)}
             to="/about"
-            className="font-[font-400] flex items-center gap-3 text-black"
+            className="font-[font-400] flex items-center gap-3 text-black pt-2 pb-2"
           >
             About
           </Link>
-          <Link
-            onClick={() => setIsOpen(false)}
-            to="/services"
-            className="font-[font-400] flex items-center gap-3 text-black"
+          <button
+            onClick={() => setDropdown(!dropdown)}
+            // to="/services"
+            className="font-[font-400] flex items-center text-black justify-between  pt-2 pb-2"
           >
             Services
-          </Link>
+            {dropdown ? <FaAngleUp /> : <FaAngleDown />}
+          </button>
+
+          <div
+            className={styles("pl-3 opacity-0 h-0 invisible transition-all", {
+              "h-auto visible opacity-100": dropdown,
+            })}
+          >
+            {serviceData.map((item, index) => (
+              <Link
+                key={index}
+                onClick={() => {
+                  setIsOpen(false);
+                  setDropdown(!dropdown);
+                }}
+                to={item.link}
+                className="font-[font-400] flex items-center gap-3 text-black pt-2 pb-2"
+              >
+                {item.title}
+              </Link>
+            ))}
+          </div>
+
           <Link
             onClick={() => setIsOpen(false)}
             to="/blog"
-            className="font-[font-400] flex items-center gap-3 text-black"
+            className="font-[font-400] flex items-center gap-3 text-black pt-2 pb-2"
           >
             Blog
           </Link>
           <Link
             onClick={() => setIsOpen(false)}
             to={URLContact()}
-            className="font-[font-400] flex items-center gap-3 text-black"
+            className="font-[font-400] flex items-center gap-3 text-black pt-2 pb-2"
           >
             Contact
           </Link>

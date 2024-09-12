@@ -35,10 +35,14 @@ import {
 } from "react-icons/si";
 import { TbBrandDjango, TbBrandKotlin } from "react-icons/tb";
 import mvc from "../../assets/image/mvc.png";
+import { URLServiceSingle } from "../../routes/url";
 
 const serviceData = [
   {
     url: "web-development",
+    link: URLServiceSingle("web-development"),
+    title: "Web Development",
+    icon: <CiGlobe size={25} color="var(--primaryColor)" />,
     hero: {
       title: "Elevating Your Digital Presence with Dynamic Web Apps",
       subtitle:
