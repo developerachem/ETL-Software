@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Container from "../../container/Container";
+import { URLBlogSingle } from "../../routes/url";
 
 function Blog() {
   useEffect(() => {
@@ -53,7 +54,7 @@ const BlogBox = () => {
           </div>
         </div>
         <Link
-          to="/"
+          to={URLBlogSingle("blog-name")}
           className="text-[18px] font-[font-600] mb-3 block hover:text-primaryColor"
           style={{ lineHeight: "20px" }}
         >

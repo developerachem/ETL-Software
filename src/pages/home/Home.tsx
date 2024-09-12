@@ -1,7 +1,5 @@
 import { TiArrowBackOutline } from "react-icons/ti";
 import { Link } from "react-router-dom";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
 import ai from "../../assets/image/ai.jpg";
 import dataEng from "../../assets/image/data-eng.jpg";
 import devops from "../../assets/image/devops.jpg";
@@ -12,10 +10,55 @@ import BannerSlider from "../../components/bannerSlider/BannerSlider";
 import Title from "../../components/title/Title";
 import Container from "../../container/Container";
 
+// import "swiper/css";
+// import "swiper/css/navigation";
+// import "swiper/css/pagination";
+
+import { useEffect } from "react";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+
 function Home() {
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // const settings = {
+  //   // dots: true,
+  //   infinite: true,
+  //   slidesToShow: 5,
+  //   slidesToScroll: 1,
+  //   autoplay: true,
+  //   // speed: 1000,
+  //   autoplaySpeed: 2000,
+  //   // cssEase: "linear",
+
+  //   responsive: [
+  //     {
+  //       breakpoint: 1024,
+  //       settings: {
+  //         slidesToShow: 3,
+  //         slidesToScroll: 3,
+  //         infinite: true,
+  //       },
+  //     },
+  //     {
+  //       breakpoint: 600,
+  //       settings: {
+  //         slidesToShow: 2,
+  //         slidesToScroll: 2,
+  //         initialSlide: 2,
+  //       },
+  //     },
+  //     {
+  //       breakpoint: 480,
+  //       settings: {
+  //         slidesToShow: 1,
+  //         slidesToScroll: 1,
+  //       },
+  //     },
+  //   ],
+  // };
 
   return (
     <>
@@ -122,109 +165,36 @@ function Home() {
         </Container>
       </div>
 
-      <div className="py-[100px]">
+      {/* <div className="py-[100px]">
         <Container>
           <div className="w-full">
-            <div className="flex gap-5  items-end">
-              <Swiper
-                breakpoints={{
-                  320: { slidesPerView: 1, spaceBetween: 20 },
-                  480: { slidesPerView: 2, spaceBetween: 20 },
-                  768: { slidesPerView: 3, spaceBetween: 20 },
-                  1024: { slidesPerView: 4, spaceBetween: 20 },
-                  1100: { slidesPerView: 5, spaceBetween: 20 },
-                  1350: { slidesPerView: 6, spaceBetween: 20 },
-                }}
-                // spaceBetween={50}
-                // slidesPerView={6}
-                onSwiper={(swiper) => console.log({ swiper })}
-                // pagination={{
-                //   clickable: true,
-                // }}
-                loop={true}
-                autoplay={{
-                  delay: 2500,
-                  disableOnInteraction: false,
-                }}
-                modules={[Autoplay, Pagination, Navigation]}
-              >
-                <SwiperSlide className="flex justify-center items-center">
+            <marquee className="flex">
+              <div className="flex items-center gap-5">
+                <SliderBox />
+                <SliderBox />
+                <SliderBox />
+                <SliderBox />
+                <SliderBox />
+                <SliderBox />
+                <SliderBox />
+              </div>
+            </marquee>
+            <div className="">
+              <div className="">
+                <Slider {...settings}>
                   <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
                   <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
                   <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
                   <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
                   <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
                   <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
                   <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
-                  <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
-                  <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
-                  <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
-                  <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
-                  <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
-                  <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
-                  <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
-                  <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
-                  <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
-                  <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
-                  <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
-                  <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
-                  <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
-                  <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
-                  <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
-                  <SliderBox />
-                </SwiperSlide>
-                <SwiperSlide className="flex justify-center items-center">
-                  <SliderBox />
-                </SwiperSlide>
-              </Swiper>
+                </Slider>
+              </div>
             </div>
           </div>
         </Container>
-      </div>
+      </div> */}
 
       <div className="lg:h-[100px]" />
     </>
@@ -277,15 +247,15 @@ const ServiceBox = ({ content }: serviceProps) => {
 };
 
 // Slider Box
-const SliderBox = () => {
-  return (
-    <div className="bg-white hover:bg-red-400 p-5 shadow border w-full flex flex-col justify-center items-center gap-5 mb-10 rounded-lg">
-      <img
-        src="https://cdn-dpdal.nitrocdn.com/GyhcCIiZNdTIbeWlnyLmouvoGPRcWSwV/assets/images/optimized/rev-7e2888a/www.emizentech.com/wp-content/uploads/2024/03/badge_3-104x0.png"
-        alt=""
-        className="w-[70%] object-contain"
-      />
-      <h1 className="font-[font-500]">IHM Africa</h1>
-    </div>
-  );
-};
+// const SliderBox = () => {
+//   return (
+//     <div className="bg-white p-5 shadow border w-full flex flex-col justify-center items-center gap-5 rounded-lg cursor-pointer ">
+//       <img
+//         src="https://cdn-dpdal.nitrocdn.com/GyhcCIiZNdTIbeWlnyLmouvoGPRcWSwV/assets/images/optimized/rev-7e2888a/www.emizentech.com/wp-content/uploads/2024/03/badge_3-104x0.png"
+//         alt=""
+//         className="w-[70%] object-contain"
+//       />
+//       <h1 className="font-[font-500]">IHM Africa</h1>
+//     </div>
+//   );
+// };

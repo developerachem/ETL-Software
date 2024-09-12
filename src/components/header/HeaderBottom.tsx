@@ -37,6 +37,7 @@ function HeaderBottom() {
             {/* <List title="Technology" link="/technology" /> */}
             <List title="Portfolio" link="/portfolio" />
             <List title="Blog" link="/blog" />
+            <List title="Career" link="/career" />
             <List title="Contact" link="/contact" />
           </ul>
         </div>

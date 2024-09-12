@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "swiper/css";
+import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import "./App.css";
 import ErrorBoundaryFallback from "./components/error-boundary/ErrorBoundaryFallback";
