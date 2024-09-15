@@ -30,7 +30,7 @@ function Career() {
               </Link>
             </div>
             <img
-              src="/career.png"
+              src="/career-path.jpg"
               alt=""
               className="absolute h-[60px] w-[170px] top-2 object-contain -left-[17px]"
             />
@@ -61,7 +61,7 @@ function Career() {
               </Link>
             </div>
             <img
-              src="/career.png"
+              src="/career-path.jpg"
               alt=""
               className="absolute h-[60px] w-[170px] top-2 object-contain -left-[17px]"
             />

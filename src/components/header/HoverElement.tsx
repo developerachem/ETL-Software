@@ -30,7 +30,7 @@ const ServiceList = ({ data }: listProps) => {
         className={`flex items-center gap-3 hover:bg-color200 text-black rounded-xl py-1.5 px-2 ease-in duration-300`}
       >
         <div
-          className={`bg-color500 rounded-full h-10 w-10 flex justify-center items-center`}
+          className={`border rounded-full h-10 w-10 flex justify-center items-center`}
         >
           {data.icon}
         </div>
