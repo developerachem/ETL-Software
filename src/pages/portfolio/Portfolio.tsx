@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ArcAnalytics from "../../assets/image/portfolio/ArcAnalytics.png";
 import ArcApps from "../../assets/image/portfolio/ArcApps.png";
 import ArcPOS from "../../assets/image/portfolio/ArcPOS.png";
@@ -9,8 +9,17 @@ import MeetingRoom from "../../assets/image/portfolio/MeetingRoom.png";
 import TUSO from "../../assets/image/portfolio/TUSO.png";
 import Title from "../../components/title/Title";
 import Container from "../../container/Container";
+import { useGetCategoryQuery } from "../../features/category/category";
+import { styles } from "../../utils/cn";
 
 function Portfolio() {
+  // * Hokes
+  const { data: category } = useGetCategoryQuery(null);
+
+  // * Local State
+  const [selected, setSelected] = useState("");
+
+  // * Page Scroll From Top
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -21,7 +30,30 @@ function Portfolio() {
         <div className="w-full">
           <Title title="Portfolio" />
 
-          <div className="mt-24 grid sm:grid-cols-2 xl:grid-cols-3 gap-5 w-full">
+          <div className="mt-24 flex flex-wrap w-full mb-2 gap-3">
+            <button
+              onClick={() => setSelected("")}
+              className={styles(
+                "py-1.5 border rounded-lg px-4 hover:bg-primaryColor transition-all hover:text-white font-[font-500]",
+                { "bg-primaryColor text-white": selected === "" }
+              )}
+            >
+              All
+            </button>
+            {category?.data?.map((item: { name: string }, index: number) => (
+              <button
+                onClick={() => setSelected(item?.name)}
+                key={index}
+                className={styles(
+                  "py-1.5 border rounded-lg px-4 hover:bg-primaryColor transition-all hover:text-white font-[font-500]",
+                  { "bg-primaryColor text-white": selected === item?.name }
+                )}
+              >
+                {item?.name}
+              </button>
+            ))}
+          </div>
+          <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5 w-full">
             <PortfolioBox
               item={{
                 title: "SmartCare Pro",
@@ -87,14 +119,14 @@ function Portfolio() {
 
 export default Portfolio;
 
-interface portfolioType {
+export interface portfolioType {
   item: {
     title: string;
     desc: string;
     image: string;
   };
 }
-const PortfolioBox = ({ item }: portfolioType) => {
+export const PortfolioBox = ({ item }: portfolioType) => {
   return (
     <div className="shadow-lg p-5 bg-white portfolio-box relative rounded-lg overflow-hidden">
       <img

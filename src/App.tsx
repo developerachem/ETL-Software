@@ -6,9 +6,14 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
+import PrivateGuard from "./admin/guard/PrivateGuard";
+import PublicGuard from "./admin/guard/PublicGuard";
+import useAuthCheck from "./admin/hooks/auth/useAuthenticationCheck";
+import AdminLayout from "./admin/layouts/AdminLayout";
+import Login from "./admin/pages/login/Login";
 import "./App.css";
 import ErrorBoundaryFallback from "./components/error-boundary/ErrorBoundaryFallback";
-import { setScroll } from "./features/window/window";
+import Loader from "./components/loader/Loader";
 import RootLayout from "./layout/RootLayout";
 import About from "./pages/about/About";
 import Blog from "./pages/blog/Blog";
@@ -17,7 +22,9 @@ import Home from "./pages/home/Home";
 import Portfolio from "./pages/portfolio/Portfolio";
 import Services from "./pages/services/Services";
 import Technology from "./pages/technology/Technology";
+import { adminRouter } from "./routes/adminRouters";
 import { appRouter } from "./routes/appRouter";
+import { setScroll } from "./window/window";
 
 const router = createBrowserRouter([
   {
@@ -51,9 +58,29 @@ const router = createBrowserRouter([
         path: "/contact",
         element: <Contact />,
       },
+
       ...appRouter,
     ],
     errorElement: <ErrorBoundaryFallback />,
+  },
+
+  {
+    element: <PrivateGuard />,
+    children: [
+      {
+        element: <AdminLayout />,
+        children: adminRouter,
+      },
+    ],
+  },
+  {
+    element: <PublicGuard />,
+    children: [
+      {
+        path: "/login",
+        element: <Login />,
+      },
+    ],
   },
 ]);
 
@@ -63,6 +90,9 @@ function App() {
   }, []);
 
   const dispatch = useDispatch();
+  const { isChecked } = useAuthCheck();
+
+  console.log(isChecked);
 
   const handleScroll = () => {
     const position = window.pageYOffset;
@@ -77,13 +107,10 @@ function App() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  );
+  return <>{!isChecked ? <Loader /> : <RouterProvider router={router} />}</>;
 }
 
 export default App;

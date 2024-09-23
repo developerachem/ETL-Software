@@ -29,7 +29,7 @@ function ServiceSingle() {
 
   return (
     <>
-      <div className="h-[70vh] relative bg-[#F4F5FA]">
+      <div className="min-h-[70vh] h-[80vh] relative bg-[#F4F5FA]">
         <Container>
           <div className="w-full md:w-[60%] ">
             <h1 className="font-[font-it] text-[30px] md:text-[50px] xl:text-[55px] text-primaryColor mb-5 text-center md:text-left">

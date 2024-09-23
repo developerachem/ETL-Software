@@ -6,6 +6,7 @@ import { ServiceHoverElement } from "./HoverElement";
 function HeaderBottom() {
   const storedMode = localStorage.getItem("localColor") || "blue";
   const [mode, setMode] = useState(storedMode);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   // * Mode Switcher
   const toggleMode = (mod: string) => {
@@ -22,26 +23,39 @@ function HeaderBottom() {
     }
   }, [mode]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = (window.scrollY / height) * 100;
+      setScrollPosition(scrolled);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
-      <div className="fixed bottom-5 w-full flex justify-center items-center z-30">
-        <div className="bg-white shadow-xl flex rounded-full border px-2 p-2">
-          <ul className="flex gap-0">
-            <List title="Home" link="/" />
-            <List title="About" link="/about" />
-            <List
-              title="Services"
-              isButton
-              children={<ServiceHoverElement />}
-            />
-            {/* <List title="Technology" link="/technology" /> */}
-            <List title="Portfolio" link="/portfolio" />
-            <List title="Blog" link="/blog" />
-            <List title="Career" link="/career" />
-            <List title="Contact" link="/contact" />
-          </ul>
+      {scrollPosition < 95 && (
+        <div className="fixed bottom-5 w-full flex justify-center items-center z-30">
+          <div className="bg-white shadow-xl flex rounded-full border px-2 p-2">
+            <ul className="flex gap-0">
+              <List title="Home" link="/" />
+              <List title="About" link="/about" />
+              <List
+                title="Services"
+                isButton
+                children={<ServiceHoverElement />}
+              />
+              {/* <List title="Technology" link="/technology" /> */}
+              <List title="Portfolio" link="/portfolio" />
+              <List title="Blog" link="/blog" />
+              <List title="Career" link="/career" />
+              <List title="Contact" link="/contact" />
+            </ul>
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="h-[60px] w-[30px] bg-[#fff] fixed top-[40%] right-0 mr-0 rounded-tl-lg rounded-bl-lg shadow border overflow-hidden flex flex-col">
         <button

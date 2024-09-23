@@ -1,13 +1,58 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
+import toast from "react-hot-toast";
 import { FaPhone } from "react-icons/fa6";
 import { IoMailUnreadOutline } from "react-icons/io5";
 import { MdPlace } from "react-icons/md";
 import Container from "../../container/Container";
+import { usePostContactMutation } from "../../features/constct/contsct";
 
 function Contact() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const [postContact, { isLoading, isSuccess, isError, error }] =
+    usePostContactMutation();
+
+  // * Local State
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [subject, setSubject] = React.useState("");
+  const [message, setMessage] = React.useState("");
+
+  // * Handle Submit From
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!name || !email || !subject || !message) {
+      toast.error("All Fields are required");
+    }
+
+    postContact({
+      name: name,
+      email: email,
+      subject: subject,
+      message: message,
+    });
+  };
+
+  // * Action After Submit
+  useEffect(() => {
+    if (isError) {
+      toast.dismiss();
+      toast.error("Something when wrong. Please try again.");
+      console.log(error);
+    }
+
+    if (!isLoading && isSuccess) {
+      toast.dismiss();
+      toast.success("Message sent successfully!");
+      setName("");
+      setEmail("");
+      setSubject("");
+      setMessage("");
+    }
+  }, [isLoading, isSuccess, isError, error]);
 
   return (
     <>
@@ -31,7 +76,10 @@ function Contact() {
                 </p>
               </div>
 
-              <div className="bg-primaryColor p-5 xl:p-8 w-full lg:max-w-[50%] xl:max-w-[40%] rounded shadow">
+              <form
+                onSubmit={handleSubmit}
+                className="bg-primaryColor p-5 xl:p-8 w-full lg:max-w-[50%] xl:max-w-[40%] rounded shadow"
+              >
                 <h1 className="text-white text-[30px] lg:text-[35px] font-[font-600] mb-2 xl:mb-5">
                   Contact Us
                 </h1>
@@ -42,14 +90,20 @@ function Contact() {
                       type="text"
                       placeholder="Type here"
                       className="py-3 px-3 rounded-md placeholder:text-[#ffffff99] text-white outline-none focus:outline-none focus:border-none w-full bg-[#ffffff30]"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
                     />
                   </label>
                   <label className="w-full mt-2 xl:mt-5 block">
                     <p className="text-white">Email</p>
                     <input
-                      type="text"
+                      type="email"
                       placeholder="Type here"
                       className="py-3 px-3 rounded-md placeholder:text-[#ffffff99] text-white outline-none focus:outline-none focus:border-none w-full bg-[#ffffff30]"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
                     />
                   </label>
                 </div>
@@ -60,6 +114,9 @@ function Contact() {
                     type="text"
                     placeholder="Type here"
                     className="py-3 px-3 rounded-md placeholder:text-[#ffffff99] text-white outline-none focus:outline-none focus:border-none w-full bg-[#ffffff30]"
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
+                    required
                   />
                 </label>
                 <label className="w-full mt-2 xl:mt-5 block">
@@ -68,13 +125,16 @@ function Contact() {
                     placeholder="Type here"
                     className="textarea placeholder:text-[#ffffff99] text-white outline-none focus:outline-none focus:border-none w-full bg-[#ffffff30]"
                     style={{ height: "120px" }}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    required
                   />
                 </label>
 
                 <button className="bg-[#ffffff30] py-3 w-full mt-3 rounded-lg text-white font-[font-500]">
-                  Send
+                  {isLoading ? "Loading..." : "Send"}
                 </button>
-              </div>
+              </form>
             </div>
           </div>
         </Container>

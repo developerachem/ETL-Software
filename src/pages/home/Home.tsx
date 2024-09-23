@@ -10,18 +10,18 @@ import BannerSlider from "../../components/bannerSlider/BannerSlider";
 import Title from "../../components/title/Title";
 import Container from "../../container/Container";
 
-// import "swiper/css";
-// import "swiper/css/navigation";
-// import "swiper/css/pagination";
-
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
+import { styles } from "../../utils/cn";
+import { portfolioType } from "../portfolio/Portfolio";
 
 function Home() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const animationPosition = 68;
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
 
   // const settings = {
   //   // dots: true,
@@ -60,6 +60,16 @@ function Home() {
   //   ],
   // };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = (window.scrollY / height) * 100;
+      setScrollPosition(scrolled);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   return (
     <>
       <div className="banner">
@@ -98,6 +108,101 @@ function Home() {
             </div>
 
             <BannerSlider />
+          </div>
+        </Container>
+      </div>
+
+      <div className="py-[100px] bg-primaryColor rounded-3xl">
+        <Container>
+          <div className="w-full">
+            <div className="flex justify-start">
+              <Title
+                title="Why Excel for your nex project ?"
+                titleClass="text-white"
+                booletClass="bg-[#ffffff77]"
+              />
+            </div>
+
+            <div className="mt-5 grid grid-cols-6 gap-5">
+              <ProjectBox />
+              <ProjectBox />
+              <ProjectBox />
+              <ProjectBox />
+              <ProjectBox />
+              <ProjectBox />
+            </div>
+
+            <div className="mt-24 text-center">
+              <Link
+                to="/"
+                className="text-white font-[font-500] underline text-[20px] hover:tracking-wider transition-all"
+              >
+                Sea for yourself!
+              </Link>
+            </div>
+          </div>
+        </Container>
+      </div>
+
+      <div className="py-[200px] work-background">
+        <Container>
+          <div className="w-full grid grid-cols-3 gap-10 mt-48">
+            <PortfolioBox mt="" />
+            <div className="" />
+            <PortfolioBox mt="mt-48" />
+            <div className="" />
+            <PortfolioBox mt="" />
+            <div className="" />
+            <PortfolioBox mt="" />
+            <div className="" />
+            <PortfolioBox mt="mt-28" />
+            <div className="" />
+          </div>
+        </Container>
+      </div>
+
+      <div
+        className={styles("py-[300px] bg-transparent", {
+          "bg-color600": scrollPosition > animationPosition,
+        })}
+        style={{ transition: "0.5s" }}
+      >
+        <Container>
+          <div className="w-full">
+            <div
+              className={styles(
+                "flex w-full justify-between items-center gap-5 translate-y-[100px]",
+                { "translate-y-[0px]": scrollPosition > animationPosition }
+              )}
+              style={{ transition: "0.5s" }}
+            >
+              <div className="w-[500px]">
+                <h1 className="text-[50px] font-[font-500]">
+                  Take a Look at what
+                </h1>
+              </div>
+
+              <div className="bg-primaryColor h-[1px] w-full relative flex justify-center items-center">
+                <div
+                  className={styles(
+                    "bg-primaryColor h-[200px] w-[200px] rounded-full absolute flex justify-center items-center text-white text-[17px] font-[font-500] translate-y-[200px]",
+                    {
+                      "translate-y-[0px] bg-[#F29B1D]":
+                        scrollPosition > animationPosition,
+                    }
+                  )}
+                  style={{ transition: "1s" }}
+                >
+                  View All Project
+                </div>
+              </div>
+
+              <div className="w-[500px]">
+                <h1 className="text-[50px] font-[font-500]">
+                  We can do for you
+                </h1>
+              </div>
+            </div>
           </div>
         </Container>
       </div>
@@ -195,8 +300,6 @@ function Home() {
           </div>
         </Container>
       </div> */}
-
-      <div className="lg:h-[100px]" />
     </>
   );
 }
@@ -211,11 +314,12 @@ interface serviceProps {
     link: string;
   };
 }
+
 // * Service Box
 const ServiceBox = ({ content }: serviceProps) => {
   return (
-    <div className="w-full bg-white p-5 rounded-lg shadow-xl">
-      <div className="">
+    <div className="w-full bg-white p-5 rounded-lg shadow-xl hover:-translate-y-3 service-box">
+      <div className="overflow-hidden">
         <img
           src={
             content?.image ? content?.image : "https://via.placeholder.com/150"
@@ -246,16 +350,37 @@ const ServiceBox = ({ content }: serviceProps) => {
   );
 };
 
-// Slider Box
-// const SliderBox = () => {
-//   return (
-//     <div className="bg-white p-5 shadow border w-full flex flex-col justify-center items-center gap-5 rounded-lg cursor-pointer ">
-//       <img
-//         src="https://cdn-dpdal.nitrocdn.com/GyhcCIiZNdTIbeWlnyLmouvoGPRcWSwV/assets/images/optimized/rev-7e2888a/www.emizentech.com/wp-content/uploads/2024/03/badge_3-104x0.png"
-//         alt=""
-//         className="w-[70%] object-contain"
-//       />
-//       <h1 className="font-[font-500]">IHM Africa</h1>
-//     </div>
-//   );
-// };
+// * Project Box
+const ProjectBox = () => {
+  return (
+    <div className="bg-[#ffffff40] p-5 rounded-xl">
+      <p className="text-[18px] font-[font-400] text-white flex gap-2 mb-10">
+        <span className="h-[10px] w-[10px] bg-green-900 block rounded-full mt-2" />{" "}
+        Mobile Apps Developer
+      </p>
+
+      <h1 className="font-[font-600] text-[35px] text-white">100+</h1>
+    </div>
+  );
+};
+
+// * Portfolio Box
+const PortfolioBox = ({ mt }: { mt: string; item?: portfolioType }) => {
+  return (
+    <div className="">
+      <div
+        className={`border p-10 pt-24 bg-[#cadbf3] shadow-xl border-[#00000030] rounded-xl ${mt}`}
+      >
+        <img
+          src="/TUSO.png"
+          alt=""
+          className="w-full h-full object-cover border-b"
+        />
+
+        <h1 className="text-[35px] font-[font-600] text-[#000000] mt-5 text-center">
+          TUSO
+        </h1>
+      </div>
+    </div>
+  );
+};

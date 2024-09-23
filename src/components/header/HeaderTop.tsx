@@ -46,6 +46,8 @@ function HeaderTop() {
               />
             </Link>
 
+            {scrollPosition}
+
             <div className="flex gap-5 items-center">
               <div className="border flex py-1 sm:py-2 gap-3 rounded-full bg-color300 px-5 items-center">
                 <IoLogoWhatsapp
@@ -77,7 +79,7 @@ function HeaderTop() {
 
       <div
         className={styles(
-          "h-screen w-[300px] bg-white md:hidden fixed top-0 right-0 z-[99] transition-all translate-x-[300px]",
+          "h-screen w-[300px] bg-white md:hidden fixed top-0 right-0 z-[999] transition-all translate-x-[300px]",
           { "translate-x-[0]": isOpen }
         )}
         style={{ boxShadow: "0 0 20px #00000050" }}

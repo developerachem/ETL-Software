@@ -1,5 +1,8 @@
 import { AiOutlineKubernetes, AiOutlineOpenAI } from "react-icons/ai";
+import { BiLogoPostgresql } from "react-icons/bi";
+import { BsBootstrapFill } from "react-icons/bs";
 import { CiGlobe } from "react-icons/ci";
+import { DiRedis } from "react-icons/di";
 import {
   FaAngular,
   FaAws,
@@ -12,7 +15,6 @@ import {
   FaJava,
   FaJenkins,
   FaJs,
-  FaMobileAlt,
   FaNodeJs,
   FaPhp,
   FaPython,
@@ -28,7 +30,12 @@ import { IoLogoJavascript } from "react-icons/io";
 import { IoLogoFirebase, IoLogoTableau, IoLogoVercel } from "react-icons/io5";
 import { LiaVuejs } from "react-icons/lia";
 import { MdOutlineCloud } from "react-icons/md";
-import { RiFirebaseFill, RiNextjsLine, RiReactjsFill, RiTailwindCssFill } from "react-icons/ri";
+import {
+  RiFirebaseFill,
+  RiNextjsLine,
+  RiReactjsFill,
+  RiTailwindCssFill,
+} from "react-icons/ri";
 import {
   SiAmazondynamodb,
   SiAmazonredshift,
@@ -75,21 +82,17 @@ import {
   SiXcode,
 } from "react-icons/si";
 import { TbBrandDjango, TbBrandKotlin, TbBrandMysql } from "react-icons/tb";
-import mvc from  "../../assets/image/mvc.png";   
-import restapi from "../../assets/image/restapi.png";
+import mvc from "../../assets/image/mvc.png";
 import qlikviewTutorial from "../../assets/image/qlikviewTutorial.png";
+import restapi from "../../assets/image/restapi.png";
 import { URLServiceSingle } from "../../routes/url";
-import { BsBootstrapFill } from "react-icons/bs";
-import { DiRedis } from "react-icons/di";
-import { BiLogoPostgresql } from "react-icons/bi";
-
 
 const serviceData = [
   {
     url: "web-development",
     link: URLServiceSingle("web-development"),
     title: "Web Development",
-    icon: <img src='/web-development.svg' className="h-[37px] p-1.5" />,
+    icon: <img src="/web-development.svg" className="h-[37px] p-1.5" />,
     hero: {
       title: "Elevating Your Digital Presence with Dynamic Web Apps",
       subtitle:
@@ -370,7 +373,7 @@ const serviceData = [
     url: "mobile-app-development",
     link: URLServiceSingle("mobile-app-development"),
     title: "Mobile App Development",
-    icon: <img src='/mobile-app.svg' className="h-[37px] p-1.5" />,
+    icon: <img src="/mobile-app.svg" className="h-[37px] p-1.5" />,
     hero: {
       title: "Building Mobile Apps That Make an Impact",
       subtitle:
@@ -518,7 +521,6 @@ const serviceData = [
           {
             name: "RESTful API",
             icon: <img src={restapi} className="h-[37px]" />,
-            
           },
           {
             name: "Golang",
@@ -583,14 +585,19 @@ const serviceData = [
           {
             name: "GitHub",
             icon: <FaGithub size={40} className="text-primaryColor" />,
-          }, 
+          },
           {
             name: "GitLab CI/CD",
             icon: <FaGitlab size={40} className="text-primaryColor" />,
           },
           {
             name: "App Center",
-            icon: <SiVisualstudioappcenter size={40} className="text-primaryColor" />,
+            icon: (
+              <SiVisualstudioappcenter
+                size={40}
+                className="text-primaryColor"
+              />
+            ),
           },
           {
             name: "Bitrise",
@@ -668,9 +675,10 @@ const serviceData = [
     url: "enterprise-resource-planning",
     link: URLServiceSingle("enterprise-resource-planning"),
     title: "Enterprise Resource Planning",
-    icon:  <img src='/erp.svg' className="h-[37px] p-1.5" />,
+    icon: <img src="/erp.svg" className="h-[37px] p-1.5" />,
     hero: {
-      title: "Transforming Business Operations with Tailored ERP and CRM Solutions",
+      title:
+        "Transforming Business Operations with Tailored ERP and CRM Solutions",
       subtitle:
         "Customized ERPNext implementations to streamline processes and enhance productivity.",
       icon: [
@@ -684,7 +692,8 @@ const serviceData = [
       ],
     },
     experiences: {
-      title: "Your Partner in Optimizing Business Efficiency with ERP and CRM Solutions",
+      title:
+        "Your Partner in Optimizing Business Efficiency with ERP and CRM Solutions",
       desc: "We offer comprehensive ERP and CRM development services, specializing in customizing and implementing ERPNext, a powerful open-source platform built on the Frappe framework. Our solutions help businesses efficiently manage day-to-day operations by integrating various functions into a single, cohesive system. With a focus on ERPNext, we deliver flexible, cost-effective, and robust solutions that support business growth, improve operational efficiency, and enhance decision-making at all levels of your organization. Whether you need a tailored ERPNext implementation or a custom app built on Frappe, we provide end-to-end services to optimize your processes and ensure seamless management of all business aspects.",
     },
     offer: [
@@ -780,7 +789,6 @@ const serviceData = [
           {
             name: "RESTful API",
             icon: <img src={restapi} className="h-[37px]" />,
-            
           },
         ],
       },
@@ -812,7 +820,6 @@ const serviceData = [
             name: "Google Cloud Platform (GCP)",
             icon: <MdOutlineCloud size={40} className="text-primaryColor" />,
           },
-          
 
           {
             name: "Kubernetes",
@@ -823,7 +830,7 @@ const serviceData = [
           {
             name: "GitHub",
             icon: <FaGithub size={40} className="text-primaryColor" />,
-          }, 
+          },
           {
             name: "GitLab CI/CD",
             icon: <FaGitlab size={40} className="text-primaryColor" />,
@@ -904,7 +911,7 @@ const serviceData = [
     url: "devops",
     link: URLServiceSingle("devops"),
     title: "DevOps",
-    icon: <img src='/devops.svg' className="h-[37px] p-1.5" />,
+    icon: <img src="/devops.svg" className="h-[37px] p-1.5" />,
     hero: {
       title: "Accelerate Your Software Delivery with Expert DevOps Solutions",
       subtitle:
@@ -1016,7 +1023,6 @@ const serviceData = [
           {
             name: "RESTful API",
             icon: <img src={restapi} className="h-[37px]" />,
-            
           },
         ],
       },
@@ -1048,7 +1054,6 @@ const serviceData = [
             name: "Google Cloud Platform (GCP)",
             icon: <MdOutlineCloud size={40} className="text-primaryColor" />,
           },
-          
 
           {
             name: "Kubernetes",
@@ -1059,7 +1064,7 @@ const serviceData = [
           {
             name: "GitHub",
             icon: <FaGithub size={40} className="text-primaryColor" />,
-          }, 
+          },
           {
             name: "GitLab CI/CD",
             icon: <FaGitlab size={40} className="text-primaryColor" />,
@@ -1140,7 +1145,7 @@ const serviceData = [
     url: "generative-ai",
     link: URLServiceSingle("generative-ai"),
     title: "Generative AI",
-    icon:  <img src='/ai.svg' className="h-[37px] p-1.5" />,
+    icon: <img src="/ai.svg" className="h-[37px] p-1.5" />,
     hero: {
       title: "Unlock the Power of Generative AI for Your Business",
       subtitle:
@@ -1156,7 +1161,8 @@ const serviceData = [
       ],
     },
     experiences: {
-      title: "Transform Your Business with Cutting-Edge Generative AI Solutions",
+      title:
+        "Transform Your Business with Cutting-Edge Generative AI Solutions",
       desc: "Our Generative AI services harness the power of state-of-the-art language models, like GPT, to revolutionize your business operations and customer interactions. We specialize in developing intelligent AI agents, integrating GPT into your existing platforms, and creating custom conversational AI solutions to automate tasks, generate insightful content, and deliver personalized experiences. From enhancing customer support to enabling powerful analytics, our AI-driven services are designed to unlock new opportunities, streamline processes, and foster innovation. Partner with us to bring the future of AI to your business today.",
     },
     offer: [
@@ -1265,13 +1271,12 @@ const serviceData = [
             name: "Flask",
             icon: <SiFlask size={40} className="text-primaryColor" />,
           },
-          
-          
+
           {
             name: "Django",
             icon: <TbBrandDjango size={40} className="text-primaryColor" />,
           },
-          
+
           {
             name: "RESTful API",
             icon: <img src={restapi} className="h-[37px]" />,
@@ -1344,7 +1349,7 @@ const serviceData = [
             name: "Datadog",
             icon: <SiDatadog size={40} className="text-primaryColor" />,
           },
-          
+
           {
             name: "Firebase",
             icon: <RiFirebaseFill size={40} className="text-primaryColor" />,
@@ -1421,7 +1426,7 @@ const serviceData = [
     url: "data-engineering",
     link: URLServiceSingle("data-engineering"),
     title: "Data Engineering",
-    icon: <img src='/data-eng.svg' className="h-[37px] p-1.5" />,
+    icon: <img src="/data-eng.svg" className="h-[37px] p-1.5" />,
     hero: {
       title: "Transform Your Data into Powerful Insights",
       subtitle:
@@ -1520,7 +1525,6 @@ const serviceData = [
             name: "Looker",
             icon: <SiLooker size={40} className="text-primaryColor" />,
           },
-          
         ],
       },
       {
@@ -1551,13 +1555,12 @@ const serviceData = [
             name: "Apache Kafka",
             icon: <SiApachekafka size={40} className="text-primaryColor" />,
           },
-          
-          
+
           {
             name: "Apache Spark",
             icon: <SiApachespark size={40} className="text-primaryColor" />,
           },
-          
+
           {
             name: "Apache Hive",
             icon: <SiApachehive size={40} className="text-primaryColor" />,
@@ -1568,7 +1571,9 @@ const serviceData = [
           },
           {
             name: "SQL Server",
-            icon: <SiMicrosoftsqlserver size={40} className="text-primaryColor" />,
+            icon: (
+              <SiMicrosoftsqlserver size={40} className="text-primaryColor" />
+            ),
           },
           {
             name: "PostgreSQL",
@@ -1650,7 +1655,7 @@ const serviceData = [
             name: "Prometheus",
             icon: <SiPrometheus size={40} className="text-primaryColor" />,
           },
-          
+
           {
             name: "Grafana",
             icon: <SiGrafana size={40} className="text-primaryColor" />,

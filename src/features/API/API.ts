@@ -7,10 +7,11 @@ export const API = createApi({
     prepareHeaders: (headers) => {
       headers.set(
         "authorization",
-        `Bearer ${localStorage.getItem("auth-token") || null}`
+        `Bearer ${localStorage.getItem("etl-auth-token") || null}`
       );
       return headers;
     },
   }),
+  tagTypes: ["Category", "Portfolio"],
   endpoints: () => ({}),
 });

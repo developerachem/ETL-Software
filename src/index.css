@@ -78,10 +78,9 @@ body {
   overflow-x: hidden;
 }
 
-/* 
 *::-webkit-scrollbar {
-  width: 5px !important;
-  height: 5px !important;
+  width: 0px !important;
+  height: 0px !important;
 }
 
 *::-webkit-scrollbar-track {
@@ -92,7 +91,7 @@ body {
   background-color: gray;
   background-clip: content-box;
   color: #b5b9c2;
-} */
+}
 
 /* Menu Hover */
 .menu-list:hover .hover-box {
@@ -145,6 +144,15 @@ body {
   animation-delay: 3s !important;
 }
 
+.service-box,
+.service-box img {
+  transition: 0.5s;
+}
+
+.service-box:hover img {
+  transform: scale(1.1);
+}
+
 @keyframes waves {
   0% {
     -webkit-transform: scale(0, 0);
@@ -172,6 +180,7 @@ body {
   background-color: var(--primaryColor);
   top: -0%;
 }
+
 .service-box.aos-animate:after {
   position: absolute;
   content: "";
@@ -394,4 +403,46 @@ span.swiper-pagination-bullet.swiper-pagination-bullet-active {
 .blog-box:hover .blog-triangle-top-left::after,
 .blog-box:hover .blog-triangle-top-left::before {
   transform: translateY(0) translateX(0);
+}
+
+/* Work Section */
+.work-background {
+  background-image: url("/work-bg.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Admin Dashboard */
+.category-action {
+  transition: 0.3s;
+  transform: translateX(60px);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.category-box:hover .category-action {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+/* Portfolio */
+.portfolio-hovered-item {
+  opacity: 0;
+  transition: 0.5s;
+  right: 0;
+  transform: translateX(320px);
+  position: absolute !important;
+  visibility: hidden;
+}
+
+.admin-portfolio-box:hover .portfolio-hovered-item {
+  opacity: 1;
+  right: 0;
+  transform: translateX(0);
+  visibility: visible;
 }

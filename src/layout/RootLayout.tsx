@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import Footer from "../components/footer/Footer";
 import HeaderBottom from "../components/header/HeaderBottom";
 import HeaderTop from "../components/header/HeaderTop";
 
@@ -11,6 +12,8 @@ function RootLayout() {
       <div className="hidden md:block">
         <HeaderBottom />
       </div>
+
+      <Footer />
     </div>
   );
 }
