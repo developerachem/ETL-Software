@@ -1,25 +1,24 @@
+import dayjs from "dayjs";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import Input from "../../../components/form-element/Input";
-import Select from "../../../components/form-element/Select";
 import Pagination from "../../../components/pagination/Pagination";
-import { useGetCategoryQuery } from "../../../features/category/category";
-import { openAddModal } from "../../../features/modal/modal-slice";
 import {
-  useDeletePortfolioMutation,
-  useGetPortfolioQuery,
-} from "../../../features/portfolio/portfolio";
+  useDeleteBlogsMutation,
+  useGetBlogsQuery,
+} from "../../../features/blog/blogs";
+import { openAddModal } from "../../../features/modal/modal-slice";
 import { RootState } from "../../../store/store";
 import modalType from "../../../utils/modalsType";
 import Skeleton from "../../components/skeleton/Skeleton";
-import PortfolioCreate from "./Create";
+import BlogCreate from "./Create";
 
 interface itemProps {
   _id: string;
-  name: string;
+  title: string;
   category: string;
   description: string;
   featureImage: string;
@@ -31,20 +30,17 @@ function Blogs() {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("");
 
   // * Hokes
   const dispatch = useDispatch();
   const { addModal } = useSelector((state: RootState) => state.modal);
 
   // * Redux Query
-  const { data, isLoading } = useGetPortfolioQuery({
+  const { data, isLoading } = useGetBlogsQuery({
     search,
     limit,
     page,
-    category,
   });
-  const { data: categories } = useGetCategoryQuery(null);
 
   // * Open Create Modal
   const openCreateModal = () => {
@@ -58,21 +54,13 @@ function Blogs() {
   return (
     <>
       <div className="flex justify-between mb-5">
-        <div className="w-[50%] flex gap-5">
+        <div className="w-[30%] flex gap-5">
           <Input
             placeholder="Search..."
             type="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-
-          <Select value={category} onChange={(text) => setCategory(text)}>
-            {categories?.data?.map((item: { name: string }, index: number) => (
-              <option key={index} value={item?.name}>
-                {item?.name}
-              </option>
-            ))}
-          </Select>
         </div>
 
         <button
@@ -108,7 +96,7 @@ function Blogs() {
         <div className="grid grid-cols-5 gap-5">
           {data?.data?.map((item: itemProps, index: number) => (
             <React.Fragment key={index}>
-              <PortfolioBox item={item} />
+              <BlogBox item={item} />
             </React.Fragment>
           ))}
 
@@ -139,18 +127,18 @@ function Blogs() {
         </div>
       )}
 
-      {addModal.modalId === modalType.portfolioCreate && <PortfolioCreate />}
+      {addModal.modalId === modalType.portfolioCreate && <BlogCreate />}
     </>
   );
 }
 
 export default Blogs;
 
-const PortfolioBox = ({ item }: { item: itemProps }) => {
-  const [deletePortfolio] = useDeletePortfolioMutation();
+const BlogBox = ({ item }: { item: itemProps }) => {
+  const [deleteBlogs] = useDeleteBlogsMutation();
 
   // * Handle Delete Category
-  const handleDeletePortfolio = (id: string) => {
+  const handleDeleteBlog = (id: string) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to delete this!",
@@ -161,7 +149,7 @@ const PortfolioBox = ({ item }: { item: itemProps }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        const deletePromise = deletePortfolio(id)
+        const deletePromise = deleteBlogs(id)
           .unwrap()
           .then(() => {
             toast.promise(deletePromise, {
@@ -194,7 +182,7 @@ const PortfolioBox = ({ item }: { item: itemProps }) => {
             </button>
             <button
               className="py-2 px-3 rounded flex items-center gap-2 bg-white font-[font-400]"
-              onClick={() => handleDeletePortfolio(item?._id)}
+              onClick={() => handleDeleteBlog(item?._id)}
             >
               <FaTrash />
               Delete
@@ -204,8 +192,10 @@ const PortfolioBox = ({ item }: { item: itemProps }) => {
       </div>
 
       <div className="p-3">
-        <h1 className="font-[font-500]">{item.name}</h1>
-        <p className="text-[15px]">{item?.category || "--"}</p>
+        <h1 className="font-[font-500]">{item.title}</h1>
+        <p className="text-[13px]">
+          {dayjs(item?.createdAt).format("DD MMM, YYYY") || "--"}
+        </p>
         <p className="text-[15px] mt-5">{item.description}</p>
       </div>
     </div>

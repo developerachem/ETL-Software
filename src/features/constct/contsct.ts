@@ -9,7 +9,15 @@ export const ContactService = API.injectEndpoints({
         body: data,
       }),
     }),
+
+    getContacts: builder.query({
+      query: (params) => ({
+        method: "GET",
+        url: "/contact",
+        params,
+      }),
+    }),
   }),
 });
 
-export const { usePostContactMutation } = ContactService;
+export const { usePostContactMutation, useGetContactsQuery } = ContactService;

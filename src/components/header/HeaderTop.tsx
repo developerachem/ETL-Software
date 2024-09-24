@@ -46,7 +46,7 @@ function HeaderTop() {
               />
             </Link>
 
-            {scrollPosition}
+            {scrollPosition.toFixed()}
 
             <div className="flex gap-5 items-center">
               <div className="border flex py-1 sm:py-2 gap-3 rounded-full bg-color300 px-5 items-center">

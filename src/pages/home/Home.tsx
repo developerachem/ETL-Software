@@ -13,12 +13,15 @@ import Container from "../../container/Container";
 import { useEffect, useState } from "react";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
+import useWindowWidth from "../../hooks/useWindowWidth";
 import { styles } from "../../utils/cn";
 import { portfolioType } from "../portfolio/Portfolio";
 
 function Home() {
+  const windowWidth = useWindowWidth(468);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const animationPosition = 68;
+  const animationPosition = windowWidth ? 51 : 68;
+  // const animationPosition = 68;
   // useEffect(() => {
   //   window.scrollTo(0, 0);
   // }, []);
@@ -123,7 +126,7 @@ function Home() {
               />
             </div>
 
-            <div className="mt-5 grid grid-cols-6 gap-5">
+            <div className="mt-5 grid grid-cols-1 xsm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-5">
               <ProjectBox />
               <ProjectBox />
               <ProjectBox />
@@ -146,24 +149,24 @@ function Home() {
 
       <div className="py-[200px] work-background">
         <Container>
-          <div className="w-full grid grid-cols-3 gap-10 mt-48">
+          <div className="sm:w-[75%] m-auto xmd:w-full grid xmd:grid-cols-2 xl:grid-cols-3 gap-10 mt-48">
             <PortfolioBox mt="" />
-            <div className="" />
-            <PortfolioBox mt="mt-48" />
-            <div className="" />
+            <div className="hidden xl:block" />
+            <PortfolioBox mt="xmd:mt-48" />
+            <div className="hidden xl:block" />
             <PortfolioBox mt="" />
-            <div className="" />
-            <PortfolioBox mt="" />
-            <div className="" />
-            <PortfolioBox mt="mt-28" />
-            <div className="" />
+            <div className="hidden xl:block" />
+            <PortfolioBox mt="xmd:mt-48 xl:mt-0" />
+            <div className="hidden xl:block" />
+            <PortfolioBox mt="xl:mt-28" />
+            <div className="hidden xl:block" />
           </div>
         </Container>
       </div>
 
       <div
-        className={styles("py-[300px] bg-transparent", {
-          "bg-color600": scrollPosition > animationPosition,
+        className={styles("pb-[300px] xmd:py-[300px] bg-transparent", {
+          "bg-color600 pt-[100px]": scrollPosition > animationPosition,
         })}
         style={{ transition: "0.5s" }}
       >
@@ -176,8 +179,8 @@ function Home() {
               )}
               style={{ transition: "0.5s" }}
             >
-              <div className="w-[500px]">
-                <h1 className="text-[50px] font-[font-500]">
+              <div className="min-w-[90px] xsm:min-w-[120px] sm:min-w-[180px] lg:min-w-[300px]">
+                <h1 className="text-[15px] xsm:text-[20px] sm:text-[30px] lg:text-[40px] xl:text-[50px] font-[font-500]">
                   Take a Look at what
                 </h1>
               </div>
@@ -185,7 +188,7 @@ function Home() {
               <div className="bg-primaryColor h-[1px] w-full relative flex justify-center items-center">
                 <div
                   className={styles(
-                    "bg-primaryColor h-[200px] w-[200px] rounded-full absolute flex justify-center items-center text-white text-[17px] font-[font-500] translate-y-[200px]",
+                    "bg-primaryColor h-[100px] xsm:h-[130px] lg:h-[150px] xl:h-[200px] w-[100px] xsm:w-[130px] lg:w-[150px] xl:w-[200px] rounded-full absolute flex justify-center items-center text-white text-[10px] xsm:text-[13px] lg:text-[15px] xl:text-[17px] font-[font-500] translate-y-[200px]",
                     {
                       "translate-y-[0px] bg-[#F29B1D]":
                         scrollPosition > animationPosition,
@@ -197,8 +200,8 @@ function Home() {
                 </div>
               </div>
 
-              <div className="w-[500px]">
-                <h1 className="text-[50px] font-[font-500]">
+              <div className="min-w-[90px] xsm:min-w-[120px] sm:min-w-[180px] lg:min-w-[300px]">
+                <h1 className="text-[15px] xsm:text-[20px] sm:text-[30px] lg:text-[40px] xl:text-[50px] font-[font-500]">
                   We can do for you
                 </h1>
               </div>
@@ -207,7 +210,7 @@ function Home() {
         </Container>
       </div>
 
-      <div className="py-[100px] bg-primaryColor">
+      <div className="pt-[50px] pb-[20px] xsm:py-[100px] bg-primaryColor">
         <Container>
           <div className="w-full">
             <Title
