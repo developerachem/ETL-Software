@@ -1,23 +1,19 @@
-import { useEffect, useState } from "react";
-import ArcAnalytics from "../../assets/image/portfolio/ArcAnalytics.png";
-import ArcApps from "../../assets/image/portfolio/ArcApps.png";
-import ArcPOS from "../../assets/image/portfolio/ArcPOS.png";
-import CBHIS from "../../assets/image/portfolio/CBHIS.png";
-import CMIS from "../../assets/image/portfolio/CMIS.png";
-import CarePro from "../../assets/image/portfolio/CarePro.png";
-import MeetingRoom from "../../assets/image/portfolio/MeetingRoom.png";
-import TUSO from "../../assets/image/portfolio/TUSO.png";
+import React, { useEffect, useState } from "react";
+import bannerImage from "../../assets/image/about-banner.png";
 import Title from "../../components/title/Title";
 import Container from "../../container/Container";
 import { useGetCategoryQuery } from "../../features/category/category";
+import { useGetPortfolioQuery } from "../../features/portfolio/portfolio";
 import { styles } from "../../utils/cn";
+import imagePath from "../../utils/imagePath";
 
 function Portfolio() {
-  // * Hokes
-  const { data: category } = useGetCategoryQuery(null);
-
   // * Local State
   const [selected, setSelected] = useState("");
+
+  // * Redux Hokes
+  const { data: category } = useGetCategoryQuery(null);
+  const { data: portfolios } = useGetPortfolioQuery({ category: selected });
 
   // * Page Scroll From Top
   useEffect(() => {
@@ -25,95 +21,82 @@ function Portfolio() {
   }, []);
 
   return (
-    <div className="pt-24 bg-[#F4F5FA] pb-44">
-      <Container>
-        <div className="w-full">
-          <Title title="Portfolio" />
+    <>
+      <div className="h-[400px] sm:h-[500px] lg:h-[80vh] bg-[#f2f6fa] about-banner">
+        <Container>
+          <div className="w-full">
+            <div className="grid sm:grid-cols-2 gap-5 items-center">
+              <div className="">
+                <h1 className="font-[font-it] text-[25px] md:text-[30px] lg:text-[40px] xl:text-[50px] text-primaryColor mb-5 text-center sm:text-left leading-[30px] md:leading-[40px] xl:leading-[55px]">
+                  Building Mobile Apps That Make an Impact
+                </h1>
+                <p className="text-[15px] lg:text-[18px] xl:text-[20px] text-[#4a4a4a] text-center sm:text-left">
+                  This is a simple boilerplate for ReactJS with TailwindCSS.
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Aliquid non eum ipsam quae quam fugiat qui quas, tempora in
+                  quo, sint eaque quisquam consequuntur quod blanditiis
+                  necessitatibus ullam maiores molestiae optio.
+                </p>
+                <div className="text-center sm:text-left">
+                  <button className="bg-primaryColor py-3 px-6 rounded-full text-white mt-5 font-[font-500]">
+                    Let's Talk
+                  </button>
+                </div>
+              </div>
 
-          <div className="mt-24 flex flex-wrap w-full mb-2 gap-3">
-            <button
-              onClick={() => setSelected("")}
-              className={styles(
-                "py-1.5 border rounded-lg px-4 hover:bg-primaryColor transition-all hover:text-white font-[font-500]",
-                { "bg-primaryColor text-white": selected === "" }
-              )}
-            >
-              All
-            </button>
-            {category?.data?.map((item: { name: string }, index: number) => (
+              <div className="hidden sm:flex justify-end">
+                <img className="w-[100%]" src={bannerImage} alt="" />
+              </div>
+            </div>
+          </div>
+        </Container>
+      </div>
+
+      <div className="pt-24 bg-[#F4F5FA] pb-44">
+        <Container>
+          <div className="w-full">
+            <Title title="Portfolios" />
+
+            <div className="mt-24 flex flex-wrap w-full mb-2 gap-3">
               <button
-                onClick={() => setSelected(item?.name)}
-                key={index}
+                onClick={() => setSelected("")}
                 className={styles(
                   "py-1.5 border rounded-lg px-4 hover:bg-primaryColor transition-all hover:text-white font-[font-500]",
-                  { "bg-primaryColor text-white": selected === item?.name }
+                  { "bg-primaryColor text-white": selected === "" }
                 )}
               >
-                {item?.name}
+                All
               </button>
-            ))}
+              {category?.data?.map((item: { name: string }, index: number) => (
+                <button
+                  onClick={() => setSelected(item?.name)}
+                  key={index}
+                  className={styles(
+                    "py-1.5 border rounded-lg px-4 hover:bg-primaryColor transition-all hover:text-white font-[font-500]",
+                    { "bg-primaryColor text-white": selected === item?.name }
+                  )}
+                >
+                  {item?.name}
+                </button>
+              ))}
+            </div>
+            <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5 w-full">
+              {portfolios?.data?.map((item, index: number) => (
+                <React.Fragment key={index}>
+                  <PortfolioBox
+                    item={{
+                      title: item?.name,
+                      desc: item?.description,
+                      image: imagePath(item?.featureImage),
+                    }}
+                  />
+                </React.Fragment>
+              ))}
+            </div>
           </div>
-          <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5 w-full">
-            <PortfolioBox
-              item={{
-                title: "SmartCare Pro",
-                desc: "An advanced EHR system designed to revolutionize healthcare in Zambia through digital transformation. Our data-driven approach goes beyond health informatics, enhancing clinical decision support systems and prioritizing patient-centered care.",
-                image: CarePro,
-              }}
-            />
-            <PortfolioBox
-              item={{
-                title: "TUSO",
-                desc: "A next-gen IT Helpdesk Management platform to unleash your full potential for productivity. Streamline and scale IT Operations, Manage IT Assets, Track progress and Drive results",
-                image: TUSO,
-              }}
-            />
-            <PortfolioBox
-              item={{
-                title: "Arc POS",
-                desc: "Handheld-terminal based Point of Sale software that is user friendly, extremely flexible, and fully integrated with inventory for real-time stock control. It even works both online and offline.",
-                image: ArcPOS,
-              }}
-            />
-            <PortfolioBox
-              item={{
-                title: "Arc Analytics",
-                desc: "Modern data exploration and visualization plat - form. It’s fast, lightweight, intuitive, and loaded with options that make it easy for users of all skill sets to explore and visualize their data, from simple line charts to highly detailed geos - patial charts",
-                image: ArcAnalytics,
-              }}
-            />
-            <PortfolioBox
-              item={{
-                title: "ArcApps Enterprise Resource Planning",
-                desc: "A versatile and agile Enterprise Resource Plan - ner adaptable to businesses of all sizes. From Retail, Distribution, Services to Manufacturing, this application suite is designed for both sim - plicity and power.",
-                image: ArcApps,
-              }}
-            />
-            <PortfolioBox
-              item={{
-                title: "Community Based Health Information System",
-                desc: "CBHIS in Eswatini facilitates the seamless sharing and use of information between community-based services and higher-level health facilities. The data collected by CBHIS integrates into the national health manage - ment information system. The information generated by community health services now plays a crucial role in decision-making at all levels, ensuring compliance with natio - nal and international health goals.",
-                image: CBHIS,
-              }}
-            />
-            <PortfolioBox
-              item={{
-                title: "Client Management Information System",
-                desc: "The Client Management Information System (CMIS) is a vital EHR application that supports Eswatini’s goals for epidemic control, aiming to achieve an AIDS-Free Generation, enhance HIV and TB patient care, and improve overall patient services.",
-                image: CMIS,
-              }}
-            />
-            <PortfolioBox
-              item={{
-                title: "Arc Workspace",
-                desc: "The workspace rebalancing platform for leaner space usage, smart desk/room booking, better collaboration and smoo - ther hybrid work",
-                image: MeetingRoom,
-              }}
-            />
-          </div>
-        </div>
-      </Container>
-    </div>
+        </Container>
+      </div>
+    </>
   );
 }
 
@@ -128,7 +111,7 @@ export interface portfolioType {
 }
 export const PortfolioBox = ({ item }: portfolioType) => {
   return (
-    <div className="shadow-lg p-5 bg-white portfolio-box relative rounded-lg overflow-hidden">
+    <div className="shadow-lg p-5 bg-white portfolio-box relative rounded-lg overflow-hidden transition-all">
       <img
         src={item.image}
         alt=""

@@ -1,11 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Container from "../../container/Container";
+import { useGetSettingsQuery } from "../../features/settings/settings";
 import serviceData from "../../pages/serviceSingle/serviceData";
 import { styles } from "../../utils/cn";
+import { truncateText } from "../../utils/textFormate";
 
 function Footer() {
+  // * Hoes
   const { pathname } = useLocation();
+  const { data, isLoading, isSuccess } = useGetSettingsQuery(null);
+
+  // * Local State
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  console.log(data?.data?.footerText);
+
+  // * Get scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = (window.scrollY / height) * 100;
+      setScrollPosition(scrolled);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const webTitle = document.getElementById("web-title");
+
+    if (!isLoading && isSuccess) {
+      if (webTitle) {
+        webTitle.innerHTML = data?.data?.webTitle || "Etl Software";
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading, isSuccess]);
   return (
     <>
       <div
@@ -79,15 +111,33 @@ function Footer() {
       <div className="py-5 bg-primaryColor">
         <Container>
           <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center w-full">
+            <div className="text-white text-[12px] xl:text-[15px]">
+              {truncateText(data?.data?.footerText, 100) || "--"}
+            </div>
             <p className="text-white text-[12px] xl:text-[15px]">
-              © All rights reserved by excelbd.com
-            </p>
-            <p className="text-white text-[12px] xl:text-[15px]">
-              Design and developed by excel software team
+              {data?.data?.footerRightText || "--"}
             </p>
           </div>
         </Container>
       </div>
+
+      {scrollPosition > 10 && (
+        <button
+          onClick={() => {
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }}
+          className="h-[60px] w-[60px] bg-primaryColor fixed bottom-10 right-4 z-50 rounded-full flex justify-center items-center border border-white shadow-xl"
+        >
+          <img
+            src="/arrow-up.png"
+            className="h-[30px] w-[30px] object-contain"
+            alt=""
+          />
+        </button>
+      )}
     </>
   );
 }
@@ -99,7 +149,7 @@ const Item = ({ title, link }: { title: string; link: string }) => {
   return (
     <Link
       to={link || "/"}
-      className="mt-2 hover:tracking-wider hover:text-primaryColor transition-all text-[15px] xl:text-[17px] font-[font-400]"
+      className="mt-2 hover:tracking-wider hover:text-primaryColor transition-all text-[15px] xl:text-[16px] font-[font-400] "
     >
       {title || "--"}
     </Link>

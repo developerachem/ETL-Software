@@ -1,23 +1,28 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 import Editor from "../../../components/form-element/Editor";
 import Input from "../../../components/form-element/Input";
-import { useCreateBlogMutation } from "../../../features/blog/blogs";
+import { useUpdateBlogMutation } from "../../../features/blog/blogs";
+import { RootState } from "../../../store/store";
+import imagePath from "../../../utils/imagePath";
 import DefaultModal from "../../components/modal/DefaultModal";
 import useModalOff from "../../hooks/modal/useModalOff";
 
-function BlogCreate() {
+function BlogEdit() {
+  // * Hokes
+  const closeModal = useModalOff();
+  const data: any = useSelector(
+    (state: RootState) => state.modal.editModal.data
+  );
+
   // * Local State
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [name, setName] = useState(data.title || "");
+  const [description, setDescription] = useState(data.description || "");
   const [image, setImage] = useState<File | null>(null);
 
   // * Redux Queue
-  const [createBlog, { isLoading }] = useCreateBlogMutation();
-  console.log(image);
-
-  // * Hokes
-  const closeModal = useModalOff();
+  const [updateBlog, { isLoading }] = useUpdateBlogMutation();
 
   // * handle Submit Function
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -28,18 +33,16 @@ function BlogCreate() {
       return;
     }
 
-    if (!image) {
-      toast.error("Image is required");
-      return;
-    }
-
     const formData = new FormData();
 
+    formData.append("id", data?._id);
     formData.append("title", name);
     formData.append("description", description);
-    formData.append("featureImage", image);
+    if (image) {
+      formData.append("featureImage", image);
+    }
 
-    createBlog(formData)
+    updateBlog({ id: data?._id, formData })
       .unwrap()
       .then((res) => {
         toast.dismiss();
@@ -57,7 +60,7 @@ function BlogCreate() {
   };
 
   return (
-    <DefaultModal title="Create Blog" size="5xl">
+    <DefaultModal title="Edit Blog" size="5xl">
       <form onSubmit={handleSubmit}>
         <Input
           className="mb-5 "
@@ -67,18 +70,13 @@ function BlogCreate() {
           required
         />
 
-        {/* <Textarea
-          title="Description"
-          value={description}
-          onChange={(text) => setDescription(text)}
-          required
-        /> */}
-
         <Editor state={description} setState={setDescription} />
 
         <label className="block mt-3 border border-primaryColor h-[100px] w-[100px] p-2 rounded border-dashed mb-3 cursor-pointer">
           <img
-            src={image ? URL.createObjectURL(image) : "/upload-icon.png"}
+            src={
+              image ? URL.createObjectURL(image) : imagePath(data?.featureImage)
+            }
             className=""
           />
           <input
@@ -99,11 +97,11 @@ function BlogCreate() {
           {isLoading && (
             <span className="loading loading-spinner text-white"></span>
           )}
-          {isLoading ? "Loading..." : "Create"}
+          {isLoading ? "Loading..." : "Update"}
         </button>
       </form>
     </DefaultModal>
   );
 }
 
-export default BlogCreate;
+export default BlogEdit;

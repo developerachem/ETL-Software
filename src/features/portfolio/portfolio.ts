@@ -27,6 +27,15 @@ export const PortfolioService = API.injectEndpoints({
       }),
       invalidatesTags: ["Portfolio"],
     }),
+
+    updatePortfolio: builder.mutation({
+      query: ({ id, formData }) => ({
+        method: "PATCH",
+        url: `/portfolio/${id}`,
+        body: formData,
+      }),
+      invalidatesTags: ["Portfolio"],
+    }),
   }),
 });
 
@@ -34,4 +43,5 @@ export const {
   useGetPortfolioQuery,
   useCreatePortfolioMutation,
   useDeletePortfolioMutation,
+  useUpdatePortfolioMutation,
 } = PortfolioService;

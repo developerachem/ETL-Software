@@ -15,6 +15,7 @@ import {
 } from "../../../features/modal/modal-slice";
 import { RootState } from "../../../store/store";
 import modalType from "../../../utils/modalsType";
+import { truncateText } from "../../../utils/textFormate";
 import CategoryCreate from "./Create";
 import EditCategory from "./Edit";
 
@@ -89,7 +90,7 @@ function Category() {
 
       {isLoading && (
         <div className="grid grid-cols-5 gap-5">
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(() => (
+          {Array.from({ length: 10 }).map(() => (
             <React.Fragment>
               <div className="max-w-sm mx-auto w-full">
                 <div className="animate-pulse">
@@ -160,6 +161,9 @@ const Box = ({ item }: { item: itemProps }) => {
               success: <b>Deleted Successfully</b>,
               error: <b>Could not Delete data.</b>,
             });
+          })
+          .catch((err) => {
+            toast.error(err.data.message);
           });
       }
     });
@@ -168,7 +172,9 @@ const Box = ({ item }: { item: itemProps }) => {
   return (
     <div className="bg-white p-3 shadow-lg rounded-md relative overflow-hidden category-box">
       <p className="text-[16px] font-[font-500]">{item?.name}</p>
-      <p className="text-[14px] text-[#00000099]">{item.description || "--"}</p>
+      <div className="text-[14px] text-[#00000099]">
+        {truncateText(item?.description || "", 100) || "--"}
+      </div>
 
       <div className="flex gap-3 absolute top-0 right-0 category-action justify-end bg-[#00000099] h-full w-full p-5">
         <button

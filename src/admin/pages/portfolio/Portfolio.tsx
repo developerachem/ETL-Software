@@ -7,15 +7,21 @@ import Input from "../../../components/form-element/Input";
 import Select from "../../../components/form-element/Select";
 import Pagination from "../../../components/pagination/Pagination";
 import { useGetCategoryQuery } from "../../../features/category/category";
-import { openAddModal } from "../../../features/modal/modal-slice";
+import {
+  openAddModal,
+  openEditModal,
+} from "../../../features/modal/modal-slice";
 import {
   useDeletePortfolioMutation,
   useGetPortfolioQuery,
 } from "../../../features/portfolio/portfolio";
 import { RootState } from "../../../store/store";
+import imagePath from "../../../utils/imagePath";
 import modalType from "../../../utils/modalsType";
+import { truncateText } from "../../../utils/textFormate";
 import Skeleton from "../../components/skeleton/Skeleton";
 import PortfolioCreate from "./Create";
+import PortfolioEdit from "./Edit";
 
 interface itemProps {
   _id: string;
@@ -28,14 +34,16 @@ interface itemProps {
   updatedAt: string;
 }
 function Portfolio() {
-  const [limit, setLimit] = useState(10);
+  const [limit, setLimit] = useState(8);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
 
   // * Hokes
   const dispatch = useDispatch();
-  const { addModal } = useSelector((state: RootState) => state.modal);
+  const { addModal, editModal } = useSelector(
+    (state: RootState) => state.modal
+  );
 
   // * Redux Query
   const { data, isLoading } = useGetPortfolioQuery({
@@ -63,10 +71,19 @@ function Portfolio() {
             placeholder="Search..."
             type="search"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setPage(1);
+            }}
           />
 
-          <Select value={category} onChange={(text) => setCategory(text)}>
+          <Select
+            value={category}
+            onChange={(text) => {
+              setCategory(text);
+              setPage(1);
+            }}
+          >
             {categories?.data?.map((item: { name: string }, index: number) => (
               <option key={index} value={item?.name}>
                 {item?.name}
@@ -105,7 +122,7 @@ function Portfolio() {
       )}
 
       {data?.data?.length > 0 && (
-        <div className="grid grid-cols-5 gap-5">
+        <div className="grid grid-cols-4 gap-5">
           {data?.data?.map((item: itemProps, index: number) => (
             <React.Fragment key={index}>
               <PortfolioBox item={item} />
@@ -140,6 +157,7 @@ function Portfolio() {
       )}
 
       {addModal.modalId === modalType.portfolioCreate && <PortfolioCreate />}
+      {editModal.modalId === modalType.portfolioEdit && <PortfolioEdit />}
     </>
   );
 }
@@ -148,6 +166,8 @@ export default Portfolio;
 
 const PortfolioBox = ({ item }: { item: itemProps }) => {
   const [deletePortfolio] = useDeletePortfolioMutation();
+  const dispatch = useDispatch();
+  const truncatedText = truncateText(item?.description, 150);
 
   // * Handle Delete Category
   const handleDeletePortfolio = (id: string) => {
@@ -174,11 +194,21 @@ const PortfolioBox = ({ item }: { item: itemProps }) => {
     });
   };
 
+  // * Open Edit Modal
+  const handleOpenEditModal = () => {
+    dispatch(
+      openEditModal({
+        modalId: modalType.portfolioEdit,
+        data: item,
+      })
+    );
+  };
+
   return (
-    <div className="shadow-lg rounded-lg overflow-hidden bg-white admin-portfolio-box relative">
+    <div className="shadow-lg rounded-lg overflow-hidden bg-white admin-portfolio-box relative border border-color500">
       <div className="h-[200px] w-full ">
         <img
-          src={"http://192.168.111.46:5050/" + item.featureImage}
+          src={imagePath(item?.featureImage)}
           alt=""
           className="object-cover w-full h-full"
         />
@@ -186,7 +216,7 @@ const PortfolioBox = ({ item }: { item: itemProps }) => {
         <div className="absolute top-0 p-3 bg-[#00000090] w-full h-full flex justify-end z-50 portfolio-hovered-item">
           <div className="flex flex-col gap-3 w-[100px]">
             <button
-              onClick={() => toast.error("Work in Progress")}
+              onClick={handleOpenEditModal}
               className="py-2 px-3 rounded flex items-center gap-2 bg-white font-[font-400]"
             >
               <FaEdit />
@@ -205,8 +235,8 @@ const PortfolioBox = ({ item }: { item: itemProps }) => {
 
       <div className="p-3">
         <h1 className="font-[font-500]">{item.name}</h1>
-        <p className="text-[15px]">{item?.category || "--"}</p>
-        <p className="text-[15px] mt-5">{item.description}</p>
+        <p className="text-[12px]">{item?.category || "--"}</p>
+        <div className="text-[14px] mt-5 text-[#00000096]">{truncatedText}</div>
       </div>
     </div>
   );

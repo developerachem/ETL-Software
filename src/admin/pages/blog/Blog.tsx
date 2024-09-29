@@ -10,11 +10,17 @@ import {
   useDeleteBlogsMutation,
   useGetBlogsQuery,
 } from "../../../features/blog/blogs";
-import { openAddModal } from "../../../features/modal/modal-slice";
+import {
+  openAddModal,
+  openEditModal,
+} from "../../../features/modal/modal-slice";
 import { RootState } from "../../../store/store";
+import imagePath from "../../../utils/imagePath";
 import modalType from "../../../utils/modalsType";
+import { truncateText } from "../../../utils/textFormate";
 import Skeleton from "../../components/skeleton/Skeleton";
 import BlogCreate from "./Create";
+import BlogEdit from "./Edit";
 
 interface itemProps {
   _id: string;
@@ -33,7 +39,9 @@ function Blogs() {
 
   // * Hokes
   const dispatch = useDispatch();
-  const { addModal } = useSelector((state: RootState) => state.modal);
+  const { addModal, editModal } = useSelector(
+    (state: RootState) => state.modal
+  );
 
   // * Redux Query
   const { data, isLoading } = useGetBlogsQuery({
@@ -73,7 +81,7 @@ function Blogs() {
 
       {isLoading && (
         <div className="grid grid-cols-5 gap-5">
-          {[1, 1, 1, 1, 1, 1, 1, 1, 1].map(() => (
+          {Array.from({ length: 10 }).map(() => (
             <div className="shadow-lg  relative rounded-lg overflow-hidden bg-white">
               <Skeleton height={"h-[200px]"} />
               <div className="p-3">
@@ -128,6 +136,7 @@ function Blogs() {
       )}
 
       {addModal.modalId === modalType.portfolioCreate && <BlogCreate />}
+      {editModal.modalId === modalType.portfolioEdit && <BlogEdit />}
     </>
   );
 }
@@ -136,6 +145,9 @@ export default Blogs;
 
 const BlogBox = ({ item }: { item: itemProps }) => {
   const [deleteBlogs] = useDeleteBlogsMutation();
+  const dispatch = useDispatch();
+
+  const truncatedText = truncateText(item?.description, 180);
 
   // * Handle Delete Category
   const handleDeleteBlog = (id: string) => {
@@ -162,11 +174,20 @@ const BlogBox = ({ item }: { item: itemProps }) => {
     });
   };
 
+  const handleEditModalOpen = () => {
+    dispatch(
+      openEditModal({
+        modalId: modalType.portfolioEdit,
+        data: item,
+      })
+    );
+  };
+
   return (
     <div className="shadow-lg rounded-lg overflow-hidden bg-white admin-portfolio-box relative">
       <div className="h-[200px] w-full ">
         <img
-          src={"http://192.168.111.46:5050/" + item.featureImage}
+          src={imagePath(item?.featureImage)}
           alt=""
           className="object-cover w-full h-full"
         />
@@ -174,7 +195,7 @@ const BlogBox = ({ item }: { item: itemProps }) => {
         <div className="absolute top-0 p-3 bg-[#00000090] w-full h-full flex justify-end z-50 portfolio-hovered-item">
           <div className="flex flex-col gap-3 w-[100px]">
             <button
-              onClick={() => toast.error("Work in Progress")}
+              onClick={handleEditModalOpen}
               className="py-2 px-3 rounded flex items-center gap-2 bg-white font-[font-400]"
             >
               <FaEdit />
@@ -196,7 +217,7 @@ const BlogBox = ({ item }: { item: itemProps }) => {
         <p className="text-[13px]">
           {dayjs(item?.createdAt).format("DD MMM, YYYY") || "--"}
         </p>
-        <p className="text-[15px] mt-5">{item.description}</p>
+        <div className="text-[13px] mt-5 text-[#00000090]">{truncatedText}</div>
       </div>
     </div>
   );

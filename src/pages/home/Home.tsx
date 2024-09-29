@@ -1,4 +1,3 @@
-import { TiArrowBackOutline } from "react-icons/ti";
 import { Link } from "react-router-dom";
 import ai from "../../assets/image/ai.jpg";
 import dataEng from "../../assets/image/data-eng.jpg";
@@ -342,10 +341,10 @@ const ServiceBox = ({ content }: serviceProps) => {
             className="mt-5 font-[font-600] hover:font-[font-it] transition-all text-primaryColor flex gap-2 items-center border py-2 px-5 border-primaryColor rounded-full hover:bg-primaryColor hover:text-white"
           >
             Learn More{" "}
-            <TiArrowBackOutline
+            {/* <TiArrowBackOutline
               size={20}
               className="rotate-[130deg] text-white"
-            />
+            /> */}
           </Link>
         </div>
       </div>

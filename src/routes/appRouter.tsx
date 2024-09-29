@@ -10,7 +10,7 @@ export const appRouter = [
     element: <ServiceSingle />,
   },
   {
-    path: URLBlogSingle(":name"),
+    path: URLBlogSingle(":slug"),
     element: <BlogSingle />,
   },
   {
