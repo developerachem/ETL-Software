@@ -7,6 +7,13 @@ import { useGetPortfolioQuery } from "../../features/portfolio/portfolio";
 import { styles } from "../../utils/cn";
 import imagePath from "../../utils/imagePath";
 
+interface PortfolioProps {
+  category: string;
+  title: string;
+  description: string;
+  featureImage: string;
+  name: string;
+}
 function Portfolio() {
   // * Local State
   const [selected, setSelected] = useState("");
@@ -81,7 +88,7 @@ function Portfolio() {
               ))}
             </div>
             <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-5 w-full">
-              {portfolios?.data?.map((item, index: number) => (
+              {portfolios?.data?.map((item: PortfolioProps, index: number) => (
                 <React.Fragment key={index}>
                   <PortfolioBox
                     item={{

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { AiFillStar } from "react-icons/ai";
 import { FaMinus, FaPlus } from "react-icons/fa";
@@ -576,7 +577,7 @@ interface FaqProps {
 }
 const Faq = ({ index, accordionShow, setAccordionShow, item }: FaqProps) => {
   // * Handle Accordion Toggle
-  const handleAccordion = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAccordion = (e: any) => {
     if (Number(e.target.value) === accordionShow) {
       setAccordionShow(0);
     } else {

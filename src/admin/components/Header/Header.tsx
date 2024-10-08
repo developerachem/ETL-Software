@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSelector } from "react-redux";
 import { useGetSettingsQuery } from "../../../features/settings/settings";
-import { RootState, useAppSelector } from "../../../store/store";
+import { RootState } from "../../../store/store";
 import nameProfile from "../../../utils/nameToImage";
 
 function Header() {
-  const user = useAppSelector((state) => state.auth.user);
+  const user: any = useSelector((state: RootState) => state.auth.user);
   const title = useSelector((state: RootState) => state.title.title);
   const { data } = useGetSettingsQuery(null);
 

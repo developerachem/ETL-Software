@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
@@ -7,12 +8,11 @@ import { useUpdateCategoryMutation } from "../../../features/category/category";
 import { RootState } from "../../../store/store";
 import DefaultModal from "../../components/modal/DefaultModal";
 import useModalOff from "../../hooks/modal/useModalOff";
-import { itemProps } from "./Category";
 
 function EditCategory() {
   // * Hokes
   const closeModal = useModalOff();
-  const data: itemProps = useSelector(
+  const data: any = useSelector(
     (state: RootState) => state.modal.editModal.data
   );
 

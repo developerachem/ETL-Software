@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
@@ -6,12 +7,15 @@ import Select from "../../../components/form-element/Select";
 import Textarea from "../../../components/form-element/Textarea";
 import { useGetCategoryQuery } from "../../../features/category/category";
 import { useUpdatePortfolioMutation } from "../../../features/portfolio/portfolio";
+import { RootState } from "../../../store/store";
 import imagePath from "../../../utils/imagePath";
 import DefaultModal from "../../components/modal/DefaultModal";
 import useModalOff from "../../hooks/modal/useModalOff";
 
 function PortfolioEdit() {
-  const data = useSelector((state) => state.modal.editModal.data);
+  const data: any = useSelector(
+    (state: RootState) => state.modal.editModal.data
+  );
 
   console.log(data);
 
